@@ -12,7 +12,7 @@ public class Student extends User{
    private ArrayList <CourseProgress> enrolledCourses;
 
 
-    public Student(String userId,  String username, String email, String passwordHash,ArrayList <CourseProgress> enrolledCourses) {
+    public Student(  String username, String email, String passwordHash,ArrayList <CourseProgress> enrolledCourses) {
         super(username,email,passwordHash);
         this.role="student";
         this.enrolledCourses=enrolledCourses;

@@ -11,7 +11,7 @@ package Backend;
 public class Instructor extends User{
  
 
-    public Instructor(String userId, String role, String username, String email, String passwordHash) {
+    public Instructor( String role, String username, String email, String passwordHash) {
     super( username, email, passwordHash);
         this.role = "instructor";
 
