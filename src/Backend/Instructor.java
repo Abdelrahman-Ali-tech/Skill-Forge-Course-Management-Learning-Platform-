@@ -8,21 +8,13 @@ package Backend;
  *
  * @author AliAl
  */
-public class Instructor {
-        private String userId;
-    private String role;
-    private String username;
-    private String email;
-    private String passwordHash;
-   /* private String enrolledCourses;
-    private String progress ; */
+public class Instructor extends User{
+ 
 
     public Instructor(String userId, String role, String username, String email, String passwordHash) {
-        this.userId = userId;
-        this.role = role;
-        this.username = username;
-        this.email = email;
-        this.passwordHash = passwordHash;
+    super( username, email, passwordHash);
+        this.role = "instructor";
+
     }
     
 }

@@ -5,14 +5,21 @@
 package Backend;
 
 
-public class User {
-    private String userId;
-    private String role;
-    private String username;
-    private String email;
-    private String passwordHash;
 
-    public String getUserId() {
+public class User {
+    protected String userId;
+    protected String role;
+    protected String username;
+    protected String email;
+    protected String passwordHash;
+
+    public User( String username, String email, String passwordHash) {
+        this.userId =  String.valueOf(100000 + (int) (Math.random() * 900000));
+        this.username = username;
+        this.email = email;
+        this.passwordHash = passwordHash;
+    }
+        public String getUserId() {
         return userId;
     }
 
@@ -52,12 +59,5 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public User(String userId, String role, String username, String email, String passwordHash) {
-        this.userId = userId;
-        this.role = role;
-        this.username = username;
-        this.email = email;
-        this.passwordHash = passwordHash;
-    }
 
 }

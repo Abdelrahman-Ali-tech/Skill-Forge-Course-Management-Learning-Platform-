@@ -12,10 +12,21 @@ public class Student extends User{
    private ArrayList <CourseProgress> enrolledCourses;
 
 
-    public Student(String userId, String role, String username, String email, String passwordHash,ArrayList <CourseProgress> enrolledCourses) {
-        super(userId,role,username,email,passwordHash);
+    public Student(String userId,  String username, String email, String passwordHash,ArrayList <CourseProgress> enrolledCourses) {
+        super(username,email,passwordHash);
+        this.role="student";
         this.enrolledCourses=enrolledCourses;
         
     }
+
+    public ArrayList<CourseProgress> getEnrolledCourses() {
+        return enrolledCourses;
+       
+    }
+
+    public void setEnrolledCourses(ArrayList<CourseProgress> enrolledCourses) {
+        this.enrolledCourses = enrolledCourses;
+    }
+    
     
 }
