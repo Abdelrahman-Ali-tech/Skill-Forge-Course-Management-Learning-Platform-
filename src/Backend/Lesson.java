@@ -12,13 +12,23 @@ public class Lesson {
      private String lessonId;        
      private String title;        
      private String content;        
-     private String optionalResources[];        
+     private String optionalResources[];   
+     private boolean statue;
 
     public Lesson( String title, String content, String[] optionalResources) {
         this.lessonId =  String.valueOf(100000 + (int) (Math.random() * 900000));;
         this.title = title;
         this.content = content;
         this.optionalResources = optionalResources;
+        this.statue=false;
+    }
+
+    public boolean isStatue() {
+        return statue;
+    }
+
+    public void setStatue(boolean statue) {
+        this.statue = statue;
     }
 
     public String getLessonId() {
