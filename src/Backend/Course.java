@@ -17,7 +17,9 @@ public class Course {
     private String instructorId;
     private ArrayList<Lesson> lessons;
     private ArrayList<Student> students; 
-
+  
+    
+    
     public Course( String title, String description, String instructorId,ArrayList<Lesson> lessons,  ArrayList<Student> students) {
         this.courseId =  String.valueOf(100000 + (int) (Math.random() * 900000));;
         this.title = title;
