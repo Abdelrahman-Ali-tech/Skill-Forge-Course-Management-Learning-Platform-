@@ -3,19 +3,62 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
+import Backend.Course;
+import Backend.Student;
+import java.awt.BorderLayout;
+import java.util.List;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author ahmedessam
  */
 public class ViewEnrolledStudents extends javax.swing.JPanel {
+private DefaultTableModel tableModel;
+    private JTable jTable1;
+    private String courseId;
 
-    /**
-     * Creates new form ViewEnrolledStudents
-     */
-    public ViewEnrolledStudents() {
-        initComponents();
+    public ViewEnrolledStudents(String courseId) {
+        this.courseId = courseId;
+        setLayout(new BorderLayout());
+        initTable();
+        loadStudents();
     }
+
+    private void initTable() {
+        tableModel = new DefaultTableModel(
+            new String[]{"Student ID", "Username", "Email", "Progress"}, 0
+        );
+        jTable1 = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(jTable1);
+        add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private void loadStudents() {
+        tableModel.setRowCount(0);
+
+        Course course = Course.getAllCourses().stream()
+                .filter(c -> c.getCourseId().equals(courseId))
+                .findFirst()
+                .orElse(null);
+
+        if (course != null) {
+            List<Student> students = course.getEnrolledStudents();
+            for (Student s : students) {
+                tableModel.addRow(new Object[]{
+                    s.getStudentId(),
+                    s.getUserName(),
+                    s.getEmail(),
+                    s.getProgress()
+                });
+            }
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,10 +89,10 @@ public class ViewEnrolledStudents extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
