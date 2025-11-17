@@ -21,12 +21,20 @@ public class Course {
     
     
     public Course( String title, String description, String instructorId,ArrayList<Lesson> lessons,  ArrayList<Student> students) {
-        this.courseId =  String.valueOf(100000 + (int) (Math.random() * 900000));;
+        this.courseId =  String.valueOf(100000 + (int) (Math.random() * 900000));
         this.title = title;
         this.description = description;
         this.instructorId = instructorId;
         this.lessons = lessons;
         this.students = students;
+    }
+    public Course( String title, String description, String instructorId) {
+        this.courseId =  String.valueOf(100000 + (int) (Math.random() * 900000));
+        this.title = title;
+        this.description = description;
+        this.instructorId = instructorId;
+        this.lessons = new ArrayList<Lesson>();
+        this.students = new ArrayList<Student>();
     }
 
     public String getCourseId() {
@@ -71,6 +79,14 @@ public class Course {
 
     public void addLesson(Lesson lesson) {
         this.lessons.add(lesson);
+    }
+        public void addLesson(String title, String content, String[] optionalResources) {
+        Lesson lesson =new Lesson(title, content, optionalResources);
+        this.lessons.add(lesson);
+    }
+
+    public void setLessons(ArrayList<Lesson> lessons) {
+        this.lessons = lessons;
     }
 
     public void addStudent(Student student) {

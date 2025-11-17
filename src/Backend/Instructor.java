@@ -4,17 +4,29 @@
  */
 package Backend;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author AliAl
  */
 public class Instructor extends User{
  
-
-    public Instructor( String role, String username, String email, String passwordHash) {
+    private ArrayList<Course> createdcCourses;
+    public Instructor( String role, String username, String email, String passwordHash,ArrayList<Course> createdcCourses) {
     super( username, email, passwordHash);
         this.role = "instructor";
+        this.createdcCourses=createdcCourses;
 
+    }
+
+    public ArrayList<Course> getCreatedcCourses() {
+        return createdcCourses;
+    }
+    public  void addCourse(Course course) {
+        this.createdcCourses.add(course);
+        
+        
     }
     
 }
