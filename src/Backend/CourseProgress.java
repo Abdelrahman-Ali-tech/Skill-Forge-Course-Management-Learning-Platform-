@@ -10,6 +10,14 @@ public class CourseProgress {
 
     public CourseProgress(String courseId, int progress) {
         this.courseId = courseId;
+        this.progress = progress;
+    }
+
+    public String getCourseId() {
+        return courseId;
+    }
+        public CourseProgress(String courseId) {
+        this.courseId = courseId;
         this.progress = 0;
     }
 

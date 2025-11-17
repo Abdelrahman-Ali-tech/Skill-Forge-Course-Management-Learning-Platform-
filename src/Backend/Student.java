@@ -27,6 +27,10 @@ public class Student extends User{
     public void setEnrolledCourses(ArrayList<CourseProgress> enrolledCourses) {
         this.enrolledCourses = enrolledCourses;
     }
-    
+    public void addCourse(String courseId) {
+        CourseProgress enrolledCourse= new CourseProgress(courseId);
+        this.enrolledCourses.add(enrolledCourse);
+        
+    }
     
 }
