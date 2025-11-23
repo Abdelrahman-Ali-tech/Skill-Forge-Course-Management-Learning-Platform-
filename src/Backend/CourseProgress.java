@@ -4,13 +4,20 @@
  */
 package Backend;
  
-public class CourseProgress {
-    private String courseId;
-    private int progress;
+import java.util.ArrayList;
 
-    public CourseProgress(String courseId, int progress) {
-        this.courseId = courseId;
+public class CourseProgress {
+    private Course course;
+    private int progress;
+    private ArrayList<QuizAttempt> attempts;
+    
+    public CourseProgress(Course course) {
+        this.course = course;
         this.progress = 0;
+    }
+
+    public Course getCourse() {
+        return course;
     }
 
     public int getProgress() {
@@ -21,6 +28,32 @@ public class CourseProgress {
         this.progress = progress;
     }
     
+
+    public void updateProgress(Lesson lesson,Course course) {
+        lesson.setStatue(true);
+        int numOfCompleteLessons=0;
+        int numOfLessons=0;
+        for(Lesson l :course.getLessons())
+        {numOfLessons+=1;
+        if(l.isStatue())
+            numOfCompleteLessons+=1;
+        }
+        this.setProgress(numOfCompleteLessons/numOfLessons);
+    }
+
+    public ArrayList<QuizAttempt> getAttempts() {
+        return attempts;
+    }
     
     
+    public void addAttempt(QuizAttempt attempt){
+        attempts.add(attempt);
+    }
+    
+    public QuizAttempt getAttemptForLesson(String lessonId){
+        for(QuizAttempt a:attempts){
+            if(a.getLesssonId().equals(lessonId)) return a;
+        }
+        return null;
+    }
 }

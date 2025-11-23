@@ -1,0 +1,23 @@
+[
+  {
+    "userId": "958070",
+    "role": "Student",
+    "username": "a",
+    "email": "a@gmail.com",
+    "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+  },
+  {
+    "userId": "126825",
+    "role": "Student",
+    "username": "Username",
+    "email": "Email@gmail.com",
+    "passwordHash": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a"
+  },
+  {
+    "userId": "686815",
+    "role": "Instructor",
+    "username": "a",
+    "email": "a@yahoo.com",
+    "passwordHash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+  }
+]
