@@ -6,6 +6,9 @@ package Backend;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import java.awt.Component;
 import java.io.File;
 import java.io.FileWriter;
@@ -55,22 +58,23 @@ public class JsonDatabase {
     }
 
     //user
-    public List loadUsers() {
+    public List<User> loadUsers() {
         try {
-            String json = new String(Files.readAllBytes(Paths.get(USER_FILE)));
-            Object[] userArray = gson.fromJson(json, User[].class);
+        String json = new String(Files.readAllBytes(Paths.get(USER_FILE)));
 
-            List list = new ArrayList();
-            if (userArray != null) {
-                for (int i = 0; i < userArray.length; i++) {
-                    list.add(userArray[i]);
-                    
-                }
-            }
-            return list;
-        } catch (Exception e) {
-            return new ArrayList();
+        JsonArray array = JsonParser.parseString(json).getAsJsonArray();
+        List<User> users = new ArrayList<>();
+
+        for (JsonElement element : array) {
+            User user = gson.fromJson(element, User.class);
+            users.add(user);
         }
+
+        return users;
+
+    } catch (Exception e) {
+        return new ArrayList<>();
+    }
     }
 
     public void saveUsers(List users) {
@@ -111,21 +115,22 @@ public class JsonDatabase {
     }
 
     //courses
-    public List loadCourses() {
-        try {
-            String json = new String(Files.readAllBytes(Paths.get(COURSE_FILE)));
-            Object[] courseArray = gson.fromJson(json, Object[].class);
-            List list = new ArrayList();
-            if (courseArray != null) {
-                for (int i = 0; i < courseArray.length; i++) {
-                    list.add(courseArray[i]);
-                }
-            }
-            return list;
-        } catch (Exception e) {
-            return new ArrayList();
+    public List<Course> loadCourses() {
+    try {
+        String json = new String(Files.readAllBytes(Paths.get(COURSE_FILE)));
+
+        JsonArray array = JsonParser.parseString(json).getAsJsonArray();
+        List<Course> list = new ArrayList<>();
+
+        for (JsonElement el : array) {
+            Course course = gson.fromJson(el, Course.class);
+            list.add(course);
         }
+        return list;
+    } catch (Exception e) {
+        return new ArrayList<>();
     }
+}
 
     public void saveCourses(List courses) {
          try (FileWriter writer = new FileWriter(COURSE_FILE))  {
@@ -133,5 +138,5 @@ public class JsonDatabase {
         } catch (IOException e) {
         }
     }
-
+     
 }

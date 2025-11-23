@@ -14,6 +14,15 @@ public class Lesson {
      private String content;        
      private String optionalResources;   
      private boolean statue;
+     private Quiz quiz;
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
 
     public Lesson( String title, String content, String optionalResources) {
         this.lessonId =  String.valueOf(100000 + (int) (Math.random() * 900000));

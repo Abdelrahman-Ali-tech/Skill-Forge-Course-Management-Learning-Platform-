@@ -4,10 +4,13 @@
  */
 package Backend;
  
+import java.util.ArrayList;
+
 public class CourseProgress {
     private Course course;
     private int progress;
-
+    private ArrayList<QuizAttempt> attempts;
+    
     public CourseProgress(Course course) {
         this.course = course;
         this.progress = 0;
@@ -37,7 +40,20 @@ public class CourseProgress {
         }
         this.setProgress(numOfCompleteLessons/numOfLessons);
     }
+
+    public ArrayList<QuizAttempt> getAttempts() {
+        return attempts;
+    }
     
     
+    public void addAttempt(QuizAttempt attempt){
+        attempts.add(attempt);
+    }
     
+    public QuizAttempt getAttemptForLesson(String lessonId){
+        for(QuizAttempt a:attempts){
+            if(a.getLesssonId().equals(lessonId)) return a;
+        }
+        return null;
+    }
 }
