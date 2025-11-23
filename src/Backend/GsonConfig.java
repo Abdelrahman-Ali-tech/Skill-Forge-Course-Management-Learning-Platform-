@@ -23,9 +23,9 @@ public class GsonConfig {
 
                 String role = roleEl != null && !roleEl.isJsonNull() ? roleEl.getAsString() : null;
 
-                if ("student".equalsIgnoreCase(role)) {
+                if ("Student".equalsIgnoreCase(role)) {
                     return context.deserialize(json, Student.class);
-                } else if ("instructor".equalsIgnoreCase(role)) {
+                } else if ("Instructor".equalsIgnoreCase(role)) {
                     return context.deserialize(json, Instructor.class);
                 } else {
                     return context.deserialize(json, User.class);

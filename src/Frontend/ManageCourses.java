@@ -100,6 +100,11 @@ public class ManageCourses extends javax.swing.JPanel {
         });
 
         jButton1.setText("Manage Lessons");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("View");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +254,7 @@ loadInstructorCourses();
 
     if (confirm == JOptionPane.YES_OPTION) {
         courseList.remove(selectedRow);
-        instructor.removeCourse(selectedCourse); 
+        instructor.removeCourse(selectedCourse.getCourseId()); 
         JsonDatabase db = new JsonDatabase();
         db.saveCourses(courseList); 
         refreshTable();
@@ -281,6 +286,21 @@ loadInstructorCourses();
         frame.revalidate();
         frame.repaint();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+          int selectedRow = jTable1.getSelectedRow();
+          if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Select a course first!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+       Course selectedCourse = courseList.get(selectedRow); 
+       
+        JFrame frame = (JFrame) this.getTopLevelAncestor();
+        frame.getContentPane().removeAll();
+        frame.setContentPane(new ManageLessons(selectedCourse,this.instructor));
+        frame.revalidate();
+        frame.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
 public void refreshTable() {
     tableModel.setRowCount(0);
     for (Course c : courseList) {

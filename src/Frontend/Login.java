@@ -126,7 +126,7 @@ public class Login extends javax.swing.JPanel {
         String password = new String(jPasswordField1.getPassword()).trim();
         Authentication user = new Authentication();
         User x = user.signIn(username, password);
-
+        
     if (x == null) {
         JOptionPane.showMessageDialog(this, "Invalid username or password");
         return;

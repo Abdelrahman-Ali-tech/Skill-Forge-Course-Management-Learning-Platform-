@@ -34,7 +34,7 @@ public class StudentManagement {
     for(CourseProgress courseProgress : this.student.getEnrolledCourses())
     {
        
-       enrolledCourses.add(courseProgress.getCourse());
+       enrolledCourses.add(InstructorManagement.findCoursebyId(courses, courseProgress.getCourse()));
     }
     return enrolledCourses;
     
@@ -48,11 +48,18 @@ public class StudentManagement {
     public void  enroll(String id)
     {  
       
-      Course course=findCoursebyId(courses, id);
-      student.addCourse(course);
+     /*Course course=findCoursebyId(courses, id);
+      student.addCourse(id);
       course.addStudent(student);
+      database.saveCourses(courses);
       
       
+        ArrayList<User> users=(ArrayList<User>) database.loadUsers();
+        int index =users.indexOf((User)student);
+        users.remove(index);
+        student.removeCourse(course.getCourseId());
+        users.add(student);
+        database.saveUsers(users);*/
     }
     public Course findCoursebyId(ArrayList<Course> courses,String courseID)
     {

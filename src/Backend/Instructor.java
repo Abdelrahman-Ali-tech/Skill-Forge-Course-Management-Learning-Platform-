@@ -5,6 +5,7 @@
 package Backend;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -12,25 +13,40 @@ import java.util.ArrayList;
  */
 public class Instructor extends User{
  
-    private ArrayList<Course> createdcCourses;
-    public Instructor( String role, String username, String email, String passwordHash,ArrayList<Course> createdcCourses) {
+    private ArrayList<String> createdcCourses;
+    public Instructor( String role, String username, String email, String passwordHash,ArrayList<String> createdcCourses) {
     super( username, email, passwordHash,"instructor");
-        this.role = "instructor";
-        this.createdcCourses=createdcCourses;
+        this.role = "Instructor";
+        if(createdcCourses==null)
+        {this.createdcCourses=new ArrayList<>();}
+        else {this.createdcCourses=createdcCourses;}
 
     }
 
     public ArrayList<Course> getCreatedcCourses() {
-        return createdcCourses;
+      ArrayList<Course> courses= JsonDatabase.getCoursesByIdList(this.createdcCourses);
+        return courses;
     }
-    public  void addCourse(Course course) {
-        this.createdcCourses.add(course);
+    public  void addCourse(String courseId) {
+        this.createdcCourses.add(courseId);
         
         
     }
-    public  void removeCourse(Course c) {
-        this.createdcCourses.remove(c);
+    public  void removeCourse(String courseId) {
+        this.createdcCourses.remove( courseId);
         
     }
-    
+    @Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    User user = (User) obj;
+    return userId.equals(user.userId);
+}
+
+@Override
+public int hashCode() {
+    return Objects.hash(userId);
+}
+
 }

@@ -50,7 +50,7 @@ private boolean finished ;
 
         jButton1.setBackground(new java.awt.Color(0, 204, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add Lesson");
+        jButton1.setText("Edit Lesson");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -79,7 +79,7 @@ private boolean finished ;
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Add Lesson");
+        jLabel1.setText("Edit Lesson");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,7 +105,7 @@ private boolean finished ;
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(30, 30, 30)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(22, 45, Short.MAX_VALUE))
+                .addGap(22, 47, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(186, 186, 186)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,12 +143,26 @@ private boolean finished ;
         {JOptionPane.showMessageDialog(this, "please fill empty fields");
             return;}
 
-        this.course.addLesson(title, content, optionalResources);
-        JOptionPane.showMessageDialog(this, "Successfully Added");
         this.finished=true;
         dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getOptionalResources() {
+        return optionalResources;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
 

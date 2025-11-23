@@ -57,7 +57,7 @@
                     <Column editable="true" title="Status" type="java.lang.Object"/>
                   </Table>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="columnSelectionAllowed" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
