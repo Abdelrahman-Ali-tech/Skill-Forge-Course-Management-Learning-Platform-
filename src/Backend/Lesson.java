@@ -12,10 +12,10 @@ public class Lesson {
      private String lessonId;        
      private String title;        
      private String content;        
-     private String optionalResources[];   
+     private String optionalResources;   
      private boolean statue;
 
-    public Lesson( String title, String content, String[] optionalResources) {
+    public Lesson( String title, String content, String optionalResources) {
         this.lessonId =  String.valueOf(100000 + (int) (Math.random() * 900000));
         this.title = title;
         this.content = content;
@@ -55,11 +55,11 @@ public class Lesson {
         this.content = content;
     }
 
-    public String[] getOptionalResources() {
+    public String getOptionalResources() {
         return optionalResources;
     }
 
-    public void setOptionalResources(String[] optionalResources) {
+    public void setOptionalResources(String optionalResources) {
         this.optionalResources = optionalResources;
     }
     public void fetchtoCourse(Course course)

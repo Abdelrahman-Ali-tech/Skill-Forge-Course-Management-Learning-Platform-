@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
-
+import Backend.Authentication;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ahmedessam
@@ -47,6 +49,11 @@ public class Signup extends javax.swing.JPanel {
         });
 
         jPasswordField1.setText("Password");
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Instructor" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -57,6 +64,11 @@ public class Signup extends javax.swing.JPanel {
 
         jButton1.setForeground(new java.awt.Color(153, 153, 0));
         jButton1.setText("Signup");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -107,6 +119,35 @@ public class Signup extends javax.swing.JPanel {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    Authentication auth =new Authentication();
+    String userName=jTextField1.getText();
+    String email=jTextField2.getText();
+    String password=new String (jPasswordField1.getPassword());
+    String role=(String)jComboBox1.getSelectedItem();
+    if(userName==null ||email==null||password==null||role==null)
+    {JOptionPane.showMessageDialog(this, "please fill all fields");
+    return;}
+    String result =auth.signUp( userName, email, password,role);
+    if("wrong Email format"==result)
+    {
+    JOptionPane.showMessageDialog(this, result);
+    return;
+    }
+
+        JOptionPane.showMessageDialog(this, "Signup Successfully ");
+        JFrame frame = (JFrame)this.getTopLevelAncestor();
+        frame.getContentPane().removeAll();
+        frame.setContentPane(new Login());
+        frame.revalidate();
+        frame.repaint();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

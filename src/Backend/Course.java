@@ -80,7 +80,7 @@ public class Course {
     public void addLesson(Lesson lesson) {
         this.lessons.add(lesson);
     }
-        public void addLesson(String title, String content, String[] optionalResources) {
+        public void addLesson(String title, String content, String optionalResources) {
         Lesson lesson =new Lesson(title, content, optionalResources);
         this.lessons.add(lesson);
     }

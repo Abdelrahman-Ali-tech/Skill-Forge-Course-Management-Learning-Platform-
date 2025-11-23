@@ -14,7 +14,7 @@ public class Instructor extends User{
  
     private ArrayList<Course> createdcCourses;
     public Instructor( String role, String username, String email, String passwordHash,ArrayList<Course> createdcCourses) {
-    super( username, email, passwordHash);
+    super( username, email, passwordHash,"instructor");
         this.role = "instructor";
         this.createdcCourses=createdcCourses;
 
@@ -26,6 +26,10 @@ public class Instructor extends User{
     public  void addCourse(Course course) {
         this.createdcCourses.add(course);
         
+        
+    }
+    public  void removeCourse(Course c) {
+        this.createdcCourses.remove(c);
         
     }
     

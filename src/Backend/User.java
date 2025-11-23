@@ -13,8 +13,9 @@ public class User {
     protected String email;
     protected String passwordHash;
 
-    public User( String username, String email, String passwordHash) {
+    public User( String username, String email, String passwordHash,String role) {
         this.userId =  String.valueOf(100000 + (int) (Math.random() * 900000));
+        this.role=role;
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
@@ -48,6 +49,7 @@ public class User {
     }
 
     public void setEmail(String email) {
+        
         this.email = email;
     }
 

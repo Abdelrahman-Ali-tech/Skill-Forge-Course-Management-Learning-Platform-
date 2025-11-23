@@ -3,12 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
+import Backend.Instructor;
+import Frontend.ViewEnrolledStudents;
+import Backend.User;
+import Backend.Student;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author ahmedessam
  */
 public class InstructorDashBoard extends javax.swing.JPanel {
+    private Instructor instructor;
+
+    
+    public InstructorDashBoard(Instructor inst) {
+        this.instructor = inst;
+        initComponents();
+    }
 
     /**
      * Creates new form InstructorDashBoard
@@ -28,8 +42,6 @@ public class InstructorDashBoard extends javax.swing.JPanel {
 
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jCheckBox1.setText("jCheckBox1");
@@ -42,12 +54,6 @@ public class InstructorDashBoard extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setForeground(new java.awt.Color(204, 102, 0));
-        jButton2.setText("Manage Lessons");
-
-        jButton3.setForeground(new java.awt.Color(0, 153, 51));
-        jButton3.setText("View Enrolled Students");
-
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
         jLabel1.setText("Welcome!");
@@ -58,20 +64,13 @@ public class InstructorDashBoard extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(156, 156, 156)
+                .addComponent(jLabel1)
+                .addContainerGap(157, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(61, 61, 61))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(jButton3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(179, 179, 179))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,24 +78,22 @@ public class InstructorDashBoard extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(jButton1)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        JFrame mainContainer = (JFrame) this.getTopLevelAncestor();
+        mainContainer.getContentPane().removeAll();
+        mainContainer.setContentPane(new ManageCourses(instructor));
+        mainContainer.revalidate();
+        mainContainer.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

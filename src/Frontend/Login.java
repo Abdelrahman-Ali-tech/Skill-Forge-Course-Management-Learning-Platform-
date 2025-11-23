@@ -3,6 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
+import Backend.Authentication;
+import Backend.Instructor;
+import Backend.User;
+import Backend.Student;
+import Frontend.StudentDashBoard;
+import Frontend.InstructorDashBoard;
+import Frontend.Signup;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+
 
 /**
  *
@@ -47,6 +59,11 @@ public class Login extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 153, 0));
         jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(153, 153, 0));
@@ -96,8 +113,46 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        JFrame mainContainer = (JFrame) this.getTopLevelAncestor();
+
+        mainContainer.getContentPane().removeAll();
+        mainContainer.setContentPane(new Signup());
+        mainContainer.revalidate();
+        mainContainer.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String username = jTextField1.getText().trim();
+        String password = new String(jPasswordField1.getPassword()).trim();
+        Authentication user = new Authentication();
+        User x = user.signIn(username, password);
+
+    if (x == null) {
+        JOptionPane.showMessageDialog(this, "Invalid username or password");
+        return;
+    }
+    JFrame mainContainer = (JFrame) this.getTopLevelAncestor();
+       
+
+
+    if (x.getRole().equals("Student")) {
+        Student s = (Student) x;
+        JOptionPane.showMessageDialog(this, "Login Successful as Student");
+
+        mainContainer.getContentPane().removeAll();
+        mainContainer.setContentPane(new StudentDashBoard(s));
+        mainContainer.revalidate();
+        mainContainer.repaint();
+    } else if (x.getRole().equals("Instructor")) {
+        Instructor inst = (Instructor) x;
+        JOptionPane.showMessageDialog(this, "Login Successful as Instructor");
+
+        mainContainer.getContentPane().removeAll();
+        mainContainer.setContentPane(new InstructorDashBoard(inst));
+        mainContainer.revalidate();
+        mainContainer.repaint();
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

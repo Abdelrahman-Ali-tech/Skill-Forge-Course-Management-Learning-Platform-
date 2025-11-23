@@ -3,19 +3,59 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
+import Backend.Course;
+import Backend.Instructor;
+import Backend.InstructorManagement;
+import Frontend.ViewEnrolledStudents;
+import Backend.JsonDatabase;
+import Frontend.ManageLessons;
+import java.awt.Frame;
+import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author ahmedessam
  */
 public class ManageCourses extends javax.swing.JPanel {
+    private Instructor instructor;
+    private ArrayList<Course> courseList = new ArrayList<>();
+    private DefaultTableModel tableModel;
 
+    public ManageCourses(Instructor inst) {
+        this.instructor = inst;
+        initComponents();
+        initTable();
+        loadInstructorCourses();
+    }
+    public ManageCourses() {
+        initComponents();
+        initTable();
+    }
+  
     /**
      * Creates new form ManageCourses
      */
-    public ManageCourses() {
-        initComponents();
+    private void initTable() {
+        tableModel = new DefaultTableModel(
+            new String[]{"Course ID", "Title", "Description"}, 0
+        );
+        jTable1.setModel(tableModel);
+    }
+
+    private void loadInstructorCourses() {
+        courseList = instructor.getCreatedcCourses();
+            if (courseList == null) {
+        courseList = new ArrayList<>();
+    }
+        tableModel.setRowCount(0);
+        for (Course c : courseList) {
+            tableModel.addRow(new Object[]{
+                c.getCourseId(), c.getTitle(), c.getDescription()
+            });
+        }
     }
 
     /**
@@ -27,12 +67,13 @@ public class ManageCourses extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -60,31 +101,51 @@ public class ManageCourses extends javax.swing.JPanel {
 
         jButton1.setText("Manage Lessons");
 
+        jButton5.setText("View");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("return");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addComponent(jButton2)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addGap(12, 12, 12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
-                    .addComponent(jButton1))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -108,71 +169,124 @@ public class ManageCourses extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1839, 1839, 1839))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private ArrayList<Course> courseList = new ArrayList<>();
-    private DefaultTableModel tableModel;
-
-    public ManageCourses() {
-        initComponents();
-        initTable(); // ربط الجدول بالـ TableModel
-    }
-
-    // ========================
-    // Init Table
-    // ========================
-    private void initTable() {
-        tableModel = new DefaultTableModel(new String[]{"Course ID", "Title", "Description"}, 0);
-        jTable1.setModel(tableModel);
-
-        // بيانات تجريبية
-        // addCourse(new Course("C001", "Math", "Basic Math"));
-        // addCourse(new Course("C002", "Physics", "Physics 101"));
-    }
-
-    private void addCourse(Course c) {
-        courseList.add(c);
-        tableModel.addRow(new Object[]{c.getId(), c.getTitle(), c.getDescription()});
-    }
-
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    //Create createDialog = new Create((Frame) SwingUtilities.getWindowAncestor(this), true, instructor);
+    //createDialog.setVisible(true);
+    //loadInstructorCourses();
+    String title = JOptionPane.showInputDialog(this, "Enter Course Title:");
+if (title == null || title.trim().isEmpty()) {
+    return;
+}
+
+String description = JOptionPane.showInputDialog(this, "Enter Course Description:");
+if (description == null || description.trim().isEmpty()) {
+    return;
+}
+
+InstructorManagement management = new InstructorManagement(instructor);
+management.createCourse(title.trim(), description.trim(), instructor);
+
+JOptionPane.showMessageDialog(this, "Course Created Successfully!");
+loadInstructorCourses();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+         int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Select a course first!");
+        return;
+    }
+
+    Course selectedCourse = courseList.get(selectedRow);
+
+    String newTitle = JOptionPane.showInputDialog(this, "Edit Title:", selectedCourse.getTitle());
+    if (newTitle == null || newTitle.trim().isEmpty()) return;
+
+    String newDescription = JOptionPane.showInputDialog(this, "Edit Description:", selectedCourse.getDescription());
+    if (newDescription == null || newDescription.trim().isEmpty()) return;
+
+    selectedCourse.setTitle(newTitle.trim());
+    selectedCourse.setDescription(newDescription.trim());
+
+    JsonDatabase db = new JsonDatabase();
+    db.saveCourses(courseList);
+
+    refreshTable();
+
+    JOptionPane.showMessageDialog(this, "Course updated!");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+            int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Select a course first!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    Course selectedCourse = courseList.get(selectedRow);
+
+    int confirm = JOptionPane.showConfirmDialog(this,
+        "Are you sure you want to delete the selected course?",
+        "Confirm Delete", JOptionPane.YES_NO_OPTION);
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        courseList.remove(selectedRow);
+        instructor.removeCourse(selectedCourse); 
+        JsonDatabase db = new JsonDatabase();
+        db.saveCourses(courseList); 
+        refreshTable();
+    }
+
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Select a course first!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+       Course selectedCourse = courseList.get(selectedRow); 
+       int id = Integer.parseInt(selectedCourse.getCourseId());
+        
+        
+        JFrame frame = (JFrame) this.getTopLevelAncestor();
+        frame.getContentPane().removeAll();
+        frame.setContentPane(new ViewEnrolledStudents(id));
+        frame.revalidate();
+        frame.repaint();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        JFrame frame = (JFrame) this.getTopLevelAncestor();
+        frame.getContentPane().removeAll();
+        frame.setContentPane(new InstructorDashBoard(this.instructor));
+        frame.revalidate();
+        frame.repaint();
+    }//GEN-LAST:event_jButton6ActionPerformed
+public void refreshTable() {
+    tableModel.setRowCount(0);
+    for (Course c : courseList) {
+        tableModel.addRow(new Object[]{c.getCourseId(), c.getTitle(), c.getDescription()});
+    }
+}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -180,9 +294,10 @@ public class ManageCourses extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

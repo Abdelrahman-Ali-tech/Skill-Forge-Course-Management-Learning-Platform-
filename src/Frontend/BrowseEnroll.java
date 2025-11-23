@@ -3,12 +3,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
+import Backend.Course;
+import Backend.JsonDatabase;
+import Backend.Student;
+import Frontend.StudentDashBoard;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author ahmedessam
  */
 public class BrowseEnroll extends javax.swing.JPanel {
+    
+
+    private DefaultTableModel model;
+    private List<Course> courseList = new ArrayList<>();
+    private Student currentStudent;
+
+    public BrowseEnroll(Student currentStudent) {
+        this.currentStudent = currentStudent;
+        initComponents();
+        model = (DefaultTableModel) jTable1.getModel();
+        loadCoursesIntoTable();
+    }
+
+    private void loadCoursesIntoTable() {
+        model.setRowCount(0); 
+        JsonDatabase db = new JsonDatabase();
+        courseList = db.loadCourses();
+
+        for (Course c : courseList) {
+            String enrollStatus = c.getStudents().contains(currentStudent) ? "Enrolled" : "Available";
+            model.addRow(new Object[]{
+                c.getCourseId(),
+                c.getTitle(),
+                c.getDescription(),
+                enrollStatus
+            });
+        }
+    }
+
 
     /**
      * Creates new form BrowseEdit
@@ -28,6 +66,9 @@ public class BrowseEnroll extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -50,26 +91,105 @@ public class BrowseEnroll extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jButton1.setText("Enroll");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Access and mark");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("return");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jButton1)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Select a course first!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Course selectedCourse = courseList.get(selectedRow);
+        if (selectedCourse.getStudents().contains(currentStudent)) {
+            JOptionPane.showMessageDialog(this, "You are already enrolled in this course!");
+            return;
+        }
+
+        selectedCourse.addStudent(currentStudent);
+        currentStudent.addCourse(selectedCourse);
+
+
+        model.setValueAt("Enrolled", selectedRow, 3);
+
+        JsonDatabase db = new JsonDatabase();
+        db.saveCourses(courseList);
+        List<Student> allStudents = db.loadUsers();
+        db.saveUsers(allStudents);
+
+        JOptionPane.showMessageDialog(this, "Enrolled successfully!");
+    
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         JFrame frame = (JFrame) this.getTopLevelAncestor();
+        frame.getContentPane().removeAll();
+        frame.setContentPane(new StudentDashBoard());
+        frame.revalidate();
+        frame.repaint();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

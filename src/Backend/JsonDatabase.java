@@ -6,6 +6,7 @@ package Backend;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.awt.Component;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,6 +15,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -24,10 +28,10 @@ public class JsonDatabase {
     private static final String USER_FILE = "database/users.json";
     private static final String COURSE_FILE = "database/courses.json";
 
-    private Gson gson;
+    private final Gson gson;
 
     public JsonDatabase() {
-        gson = new GsonBuilder().setPrettyPrinting().create();
+        gson =  GsonConfig.createGson();
         createDatabaseFolder();
         createFileIfNotExists(USER_FILE, "[]");
         createFileIfNotExists(COURSE_FILE, "[]");
@@ -43,8 +47,7 @@ public class JsonDatabase {
     private void createFileIfNotExists(String path, String content) {
         File file = new File(path);
         if (!file.exists()) {
-            try {
-                FileWriter writer = new FileWriter(file);
+            try (FileWriter writer = new FileWriter(file)){
                 writer.write(content);
             } catch (IOException e) {
             }
@@ -55,12 +58,13 @@ public class JsonDatabase {
     public List loadUsers() {
         try {
             String json = new String(Files.readAllBytes(Paths.get(USER_FILE)));
-            User[] userArray = gson.fromJson(json, User[].class);
+            Object[] userArray = gson.fromJson(json, User[].class);
 
             List list = new ArrayList();
             if (userArray != null) {
                 for (int i = 0; i < userArray.length; i++) {
                     list.add(userArray[i]);
+                    
                 }
             }
             return list;
@@ -70,9 +74,10 @@ public class JsonDatabase {
     }
 
     public void saveUsers(List users) {
-        try {
-            FileWriter writer = new FileWriter(USER_FILE);
+        try (FileWriter writer = new FileWriter(USER_FILE)) {
             gson.toJson(users, writer);
+            Component JFrame = new JFrame();
+           
         } catch (IOException e) {
         }
     }
@@ -91,7 +96,7 @@ public class JsonDatabase {
         saveUsers(users);
         return true;
     }
-
+    
     public User findUserByEmail(String email) {
         List users = loadUsers();
         Iterator it = users.iterator();
@@ -123,8 +128,7 @@ public class JsonDatabase {
     }
 
     public void saveCourses(List courses) {
-        try {
-            FileWriter writer = new FileWriter(COURSE_FILE);
+         try (FileWriter writer = new FileWriter(COURSE_FILE))  {
             gson.toJson(courses, writer);
         } catch (IOException e) {
         }

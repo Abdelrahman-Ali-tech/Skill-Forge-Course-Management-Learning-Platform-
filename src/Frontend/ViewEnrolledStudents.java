@@ -3,61 +3,57 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
-import Backend.Course;
-import Backend.Student;
-import java.awt.BorderLayout;
-import java.util.List;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
+
+import Backend.Course;
+import Backend.JsonDatabase;
+import Backend.Student;
+import java.util.List;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ahmedessam
  */
 public class ViewEnrolledStudents extends javax.swing.JPanel {
-private DefaultTableModel tableModel;
-    private JTable jTable1;
-    private String courseId;
+private int courseId;
+    private DefaultTableModel model;
 
-    public ViewEnrolledStudents(String courseId) {
+    public ViewEnrolledStudents(int courseId) {
         this.courseId = courseId;
-        setLayout(new BorderLayout());
-        initTable();
+        initComponents();
+        model = (DefaultTableModel) jTable1.getModel();
         loadStudents();
     }
 
-    private void initTable() {
-        tableModel = new DefaultTableModel(
-            new String[]{"Student ID", "Username", "Email", "Progress"}, 0
-        );
-        jTable1 = new JTable(tableModel);
-        JScrollPane scrollPane = new JScrollPane(jTable1);
-        add(scrollPane, BorderLayout.CENTER);
-    }
-
     private void loadStudents() {
-        tableModel.setRowCount(0);
+        model.setRowCount(0);
 
-        Course course = Course.getAllCourses().stream()
-                .filter(c -> c.getCourseId().equals(courseId))
+        JsonDatabase db = new JsonDatabase();
+        List<Course> allCourses = db.loadCourses();
+
+        Course course = allCourses.stream()
+                .filter(c -> c.getCourseId().equals(String.valueOf(courseId)))
                 .findFirst()
                 .orElse(null);
 
-        if (course != null) {
-            List<Student> students = course.getEnrolledStudents();
-            for (Student s : students) {
-                tableModel.addRow(new Object[]{
-                    s.getStudentId(),
-                    s.getUserName(),
-                    s.getEmail(),
-                    s.getProgress()
-                });
-            }
+        if (course == null) {
+            JOptionPane.showMessageDialog(this, "Course not found!");
+            return;
+        }
+
+        List<Student> students = course.getStudents();
+
+        for (Student s : students) {
+            model.addRow(new Object[]{
+                    s.getUserId(),
+                    s.getUsername(),
+                    s.getEmail()
+            });
         }
     }
+
 
 
     /**
@@ -74,13 +70,13 @@ private DefaultTableModel tableModel;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Student ID", "Username", "Email", "Progress"
+                "Student ID", "Username", "Email"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -109,3 +105,4 @@ private DefaultTableModel tableModel;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+

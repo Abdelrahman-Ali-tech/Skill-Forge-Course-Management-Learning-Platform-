@@ -20,10 +20,10 @@ public class StudentManagement {
     public ArrayList<Course> browsingCourses ()
     {
     ArrayList<Course> availableCourses=(ArrayList<Course>) courses.clone();
-    for(CourseProgress id : this.student.getEnrolledCourses())
+    for(CourseProgress courseProgress : this.student.getEnrolledCourses())
     {
-        Course course=findCoursebyId(courses, id.getCourseId());
-        availableCourses.remove(course);
+
+        availableCourses.remove(courseProgress.getCourse());
     }
     return availableCourses;
     
@@ -31,10 +31,10 @@ public class StudentManagement {
         public ArrayList<Course> enrolledCourses ()
     {
     ArrayList<Course> enrolledCourses=new ArrayList<>();
-    for(CourseProgress id : this.student.getEnrolledCourses())
+    for(CourseProgress courseProgress : this.student.getEnrolledCourses())
     {
-        Course course=findCoursebyId(courses, id.getCourseId());
-       enrolledCourses.add(course);
+       
+       enrolledCourses.add(courseProgress.getCourse());
     }
     return enrolledCourses;
     
@@ -47,8 +47,9 @@ public class StudentManagement {
     
     public void  enroll(String id)
     {  
-      student.addCourse(id);
+      
       Course course=findCoursebyId(courses, id);
+      student.addCourse(course);
       course.addStudent(student);
       
       
