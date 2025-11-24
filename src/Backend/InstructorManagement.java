@@ -5,6 +5,9 @@
 package Backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class InstructorManagement {
@@ -82,5 +85,80 @@ public class InstructorManagement {
     return null;
     }
     
-    
+    /**
+     *
+     * @return
+     */
+    public Map<String, Map<String, LessonAnalytics>> getCourseAnalytics() {
+        Map<String, Map<String, LessonAnalytics>> analytics = new HashMap<>();
+
+        List<User> allUsers = database.loadUsers();
+        
+        List<Student> allStudents = new ArrayList<>();
+        for (User user : allUsers) {
+            if (user instanceof Student) {
+                allStudents.add((Student) user);
+            }
+        }
+
+        for (Course course : instructor.getCreatedcCourses()) {
+            
+            Map<String, LessonAggregator> lessonAggregators = new HashMap<>();
+            
+            for (Lesson lesson : course.getLessons()) {
+                lessonAggregators.put(lesson.getTitle(), new LessonAggregator());
+            }
+
+            for (Student student : allStudents) {
+                CourseProgress studentProgress = student.getCourseProgress(course.getCourseId());
+                
+                if (studentProgress != null) {
+                    for (Lesson lesson : course.getLessons()) {
+                        LessonAggregator aggregator = lessonAggregators.get(lesson.getTitle());
+                        
+                        QuizAttempt attempt = studentProgress.getAttemptForLesson(lesson.getLessonId());
+                        
+                        if (attempt != null) {
+                            aggregator.addAttempt(attempt.getScore(), attempt.getTotal());
+                        }
+
+                        if (attempt != null && attempt.getScore() == attempt.getTotal()) {
+                            aggregator.addCompletion(1);
+                        } else if (attempt != null) {
+                            aggregator.addCompletion(0);
+                        }
+                    }
+                }
+            }
+            
+            Map<String, LessonAnalytics> courseAnalytics = new HashMap<>();
+            int totalEnrolledStudents = course.getStudents().size();
+
+            for (Map.Entry<String, LessonAggregator> entry : lessonAggregators.entrySet()) {
+                String lessonTitle = entry.getKey();
+                LessonAggregator aggregator = entry.getValue();
+
+                double avgScore = aggregator.calculateAverageScore();
+                
+                double completionPercentage = (double) aggregator.getTotalCompletions() / totalEnrolledStudents * 100.0;
+                
+                courseAnalytics.put(lessonTitle, new LessonAnalytics(
+                    lessonTitle, 
+                    avgScore, 
+                    completionPercentage
+                ));
+            }
+            analytics.put(course.getCourseId(), courseAnalytics);
+        }
+
+        return analytics;
+    }
+
+    public Map<String, Map<String, LessonAnalytics>> getCourseAnalytics() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public ArrayList<Course> getCourses() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

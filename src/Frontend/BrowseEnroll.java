@@ -6,6 +6,7 @@ package Frontend;
 import Backend.Course;
 import Backend.JsonDatabase;
 import Backend.Student;
+import Backend.User;
 import Frontend.StudentDashBoard;
 
 import javax.swing.*;
@@ -165,7 +166,7 @@ public class BrowseEnroll extends javax.swing.JPanel {
 
         JsonDatabase db = new JsonDatabase();
         db.saveCourses(courseList);
-        List<Student> allStudents = db.loadUsers();
+        List<User> allStudents = db.loadUsers();
         db.saveUsers(allStudents);
 
         JOptionPane.showMessageDialog(this, "Enrolled successfully!");

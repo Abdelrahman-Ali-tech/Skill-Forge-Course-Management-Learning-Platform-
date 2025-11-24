@@ -32,5 +32,9 @@ public class Student extends User{
         this.enrolledCourses.add(enrolledCourse);
         
     }
+
+    CourseProgress getCourseProgress(String courseId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

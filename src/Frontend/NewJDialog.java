@@ -4,6 +4,8 @@
  */
 package Frontend;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author AliAl
@@ -15,6 +17,10 @@ public class NewJDialog extends javax.swing.JDialog {
         initComponents();
         jTextField2.setText(lessonText);
          this.finished=false ;
+    }
+
+    private NewJDialog(JFrame jFrame, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 
