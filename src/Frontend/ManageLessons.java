@@ -23,24 +23,30 @@ import javax.swing.table.DefaultTableModel;
 public class ManageLessons extends javax.swing.JPanel {
 
     private Course course;
-    private JsonDatabase database;
     private ArrayList<Lesson> lessons = new ArrayList<>();
     private DefaultTableModel tableModel;
     private Instructor ins;
+    private InstructorManagement instructorManagement;
     
     public ManageLessons(Course course,Instructor ins) {
         this.course=course;
         this.ins=ins;
+        this.instructorManagement=new InstructorManagement(ins);
         initComponents();
         initTable();
+        loadCoursesLessons();
     }
         private void initTable() {
         tableModel = new DefaultTableModel(new String[]{"Lesson Id", "Title", "Status"}, 0);
         jTable1.setModel(tableModel);
+        
     }
 
             private void loadCoursesLessons() {
-        this.lessons = course.getLessons();
+                     JsonDatabase database=new JsonDatabase();
+            ArrayList<Course> courses=(ArrayList<Course>) database.loadCourses();
+            course=instructorManagement.findCoursebyId(courses, course.getCourseId());
+            this.lessons = course.getLessons();
 
         tableModel.setRowCount(0);
         for (Lesson l : this.lessons) {
@@ -81,7 +87,7 @@ private Lesson getlessonselected()throws NullPointerException{
                 "Lesson ID", "Title", "Status"
             }
         ));
-        jTable1.setEnabled(false);
+        jTable1.setColumnSelectionAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         jScrollPane2.setViewportView(jScrollPane1);
@@ -167,8 +173,7 @@ private Lesson getlessonselected()throws NullPointerException{
     Lesson lesson=getlessonselected();
     if(lesson==null)
     {JOptionPane.showMessageDialog(this, "Select a lesson first");return;}
-    lessons.remove(lesson);
-    course.setLessons(lessons);
+    instructorManagement.deleteLesson(course, lesson);
     loadCoursesLessons();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -182,14 +187,17 @@ private Lesson getlessonselected()throws NullPointerException{
         Lesson lesson=getlessonselected();
     if(lesson==null)
     {JOptionPane.showMessageDialog(this, "Select a lesson first");return;}
-    AddLesson Dialog =new AddLesson((JFrame) this.getTopLevelAncestor(), true, this.course);
+    EditLesson Dialog =new EditLesson((JFrame) this.getTopLevelAncestor(), true, lesson);
+    Dialog.setVisible(true);
+
     if(Dialog.isFinished())
     {title=Dialog.getTitle();
     content=Dialog.getContent();
     optionalResources=Dialog.getOptionalResources();
     insmg.editLesson(course,lesson, title, content, optionalResources, ins);
-    JOptionPane.showMessageDialog(this, "Successfilly Added");
+    JOptionPane.showMessageDialog(this, "Successfilly Edited");
 }
+    loadCoursesLessons();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -199,23 +207,24 @@ private Lesson getlessonselected()throws NullPointerException{
  InstructorManagement insmg =new InstructorManagement(ins);
  
         
-        Lesson lesson=getlessonselected();
-    if(lesson==null)
-    {JOptionPane.showMessageDialog(this, "Select a lesson first");return;}
+       
     AddLesson Dialog =new AddLesson((JFrame) this.getTopLevelAncestor(), true, this.course);
+    Dialog.setVisible(true);
+
     if(Dialog.isFinished())
     {title=Dialog.getTitle();
     content=Dialog.getContent();
     optionalResources=Dialog.getOptionalResources();
-    insmg.addLesson(course, title, content, optionalResources, ins);
+    insmg.addLesson(course, title, content, optionalResources);
     JOptionPane.showMessageDialog(this, "Successfilly Added");
-}
+} 
+    loadCoursesLessons();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         JFrame frame = (JFrame) this.getTopLevelAncestor();
         frame.getContentPane().removeAll();
-        frame.add(new InstructorDashBoard());
+        frame.setContentPane(new InstructorDashBoard(ins));
         frame.revalidate();
         frame.repaint();
     }//GEN-LAST:event_jButton6ActionPerformed

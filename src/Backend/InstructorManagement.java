@@ -5,6 +5,7 @@
 package Backend;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 public class InstructorManagement {
@@ -21,66 +22,76 @@ public class InstructorManagement {
     }
     public  void createCourse(String title, String description, Instructor instructor) {
         Course course=new Course(title, description, instructor.getUserId());
-        instructor.addCourse(course);
+        ArrayList<User> users=(ArrayList<User>) database.loadUsers();
+        int index =users.indexOf((User)instructor);
+        users.remove(index);
+        instructor.addCourse(course.getCourseId());
+        users.add(instructor);
+        database.saveUsers(users);
         courses.add(course);
         this.database.saveCourses(courses);
 
     }
         public  void deleteCourse(String idString) {
-          Course course  =findCoursebyId((ArrayList<Course>) database.loadCourses(), idString);
-        
-        instructor.removeCourse(course);
+        Course course  =findCoursebyId((ArrayList<Course>) database.loadCourses(), idString);
+        ArrayList<User> users=(ArrayList<User>) database.loadUsers();
+        int index =users.indexOf((User)instructor);
+        users.remove(index);
+        instructor.removeCourse(course.getCourseId());
+        users.add(instructor);
+        database.saveUsers(users);
         courses.remove(course);
         this.database.saveCourses(courses);
-
     }
     public  ArrayList<Student> viewEnrolledStudents(Course c) {
-        return c.getStudents();
-        
+        return c.getStudents();   
     }
     
-    public void addLesson(Course course,String title, String content, String optionalResources,Instructor ins)
+    public void addLesson(Course course,String title, String content, String optionalResources)
     {
-    
-     course.addLesson(title,content,optionalResources);
-     ArrayList<User> users =(ArrayList<User>) database.loadUsers();
-     users.remove(ins);
-     users.add(ins);
-     database.saveUsers(users);
-        Course c=findCoursebyId(courses, course.getCourseId());
+    Course c=findCoursebyId(courses, course.getCourseId());
         c.addLesson(title,content,optionalResources);
      database.saveCourses(courses);
     } 
-    public  void editLesson(Course c,Lesson lesson,String title, String content, String optionalResources ,Instructor ins) {
-        this.courses.remove(c);
-        lesson.setContent(content);
-        lesson.setOptionalResources(optionalResources);
-        lesson.setTitle(title);
-     ArrayList<User> users =(ArrayList<User>) database.loadUsers();
-     users.remove(ins);
-     users.add(ins);
-     database.saveUsers(users);
-       this.courses.add(c);
-
+    public  void editLesson(Course course,Lesson lesson,String title, String content, String optionalResources ,Instructor ins) {
+        Course c=findCoursebyId(courses, course.getCourseId());
+        if(c==null)
+            System.out.println("course not found");
+           
+        Lesson l =findLessonbyId(c.getLessons(),lesson.getLessonId());
+        l.setContent(content);
+        l.setOptionalResources(optionalResources);
+        l.setTitle(title);
+        database.saveCourses(courses);
     }
-    public void deleteLesson(Course c,Lesson lesson)
+    public void deleteLesson(Course course,Lesson lesson)
     {
-    
-    
+    Course c=findCoursebyId(courses, course.getCourseId());
+     if(c==null)
+            System.out.println("course not found");
     ArrayList<Lesson> lessons=c.getLessons();
-    lessons.remove(lesson);
-    c.setLessons(lessons);
-    
+    Lesson l =findLessonbyId(c.getLessons(),lesson.getLessonId());
+    lessons.remove(l);
+   
+    database.saveCourses(courses);  
     }
-    public Course findCoursebyId(ArrayList<Course> courses,String courseID)
+    public static Course findCoursebyId(ArrayList<Course> courses,String courseID)
     {
     for (Course c :courses)
     {
-    if(c.getCourseId()==courseID)
+    if(c.getCourseId().equals(courseID))
         return c;
     }
     return null;
     }
     
-    
+        public static Lesson findLessonbyId(ArrayList<Lesson> lessons,String lessonID)
+    {
+    for (Lesson lesson :lessons)
+    {
+    if(lesson.getLessonId().equals(lessonID))
+        return lesson;
+    }
+    return null;
+    }
 }

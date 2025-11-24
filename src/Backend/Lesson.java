@@ -4,6 +4,8 @@
  */
 package Backend;
 
+import java.util.Objects;
+
 /**
  *
  * @author AliAl
@@ -75,5 +77,5 @@ public class Lesson {
     {
     course.addLesson(this);
     }
-    
+
 }

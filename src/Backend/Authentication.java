@@ -40,6 +40,7 @@ public class Authentication {
     { try{
         User user =this.database.findUserByEmail(email);
         String hashPassword=hashing(password);
+                System.out.println("signin checker");
         if(hashPassword.equals(user.getPasswordHash()))
             return user;
         else return null;
@@ -54,8 +55,12 @@ public class Authentication {
 {
 if (!email.toLowerCase().endsWith("@gmail.com")&& !email.toLowerCase().endsWith("@outlook.com")&& !email.toLowerCase().endsWith("@yahoo.com"))
      return "wrong Email format";
-User user=new User(username, email, hashing(passwordHash),role);
-  this.database.addUser(user);
+if(role.equals("Student"))
+{Student student=new Student(username, email, hashing(passwordHash),null);
+  this.database.addUser(student);}
+ else
+{Instructor instructor=new Instructor(role,username, email, hashing(passwordHash),null);
+  this.database.addUser(instructor);}
 
 return "Successfully Added";
 }

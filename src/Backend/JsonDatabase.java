@@ -20,7 +20,8 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 /**
  *
@@ -58,8 +59,10 @@ public class JsonDatabase {
     }
 
     //user
+
     public List<User> loadUsers() {
         try {
+
         String json = new String(Files.readAllBytes(Paths.get(USER_FILE)));
 
         JsonArray array = JsonParser.parseString(json).getAsJsonArray();
@@ -74,8 +77,11 @@ public class JsonDatabase {
 
     } catch (Exception e) {
         return new ArrayList<>();
+
     }
+
     }
+}
 
     public void saveUsers(List users) {
         try (FileWriter writer = new FileWriter(USER_FILE)) {
@@ -113,24 +119,20 @@ public class JsonDatabase {
         }
         return null;
     }
+  
+    
+    
 
-    //courses
-    public List<Course> loadCourses() {
+
+public List<Course> loadCourses() {
     try {
         String json = new String(Files.readAllBytes(Paths.get(COURSE_FILE)));
-
-        JsonArray array = JsonParser.parseString(json).getAsJsonArray();
-        List<Course> list = new ArrayList<>();
-
-        for (JsonElement el : array) {
-            Course course = gson.fromJson(el, Course.class);
-            list.add(course);
-        }
-        return list;
+        Type listType = new TypeToken<ArrayList<Course>>() {}.getType();
+        ArrayList<Course> courses = gson.fromJson(json, listType);
+        return courses != null ? courses : new ArrayList<>();
     } catch (Exception e) {
         return new ArrayList<>();
     }
-}
 
     public void saveCourses(List courses) {
          try (FileWriter writer = new FileWriter(COURSE_FILE))  {
@@ -138,5 +140,37 @@ public class JsonDatabase {
         } catch (IOException e) {
         }
     }
-     
+    public static ArrayList<Course> getCoursesByIdList(ArrayList<String> courseIds) {
+    JsonDatabase db = new JsonDatabase();
+    List<Course> allCourses = db.loadCourses();
+    ArrayList<Course> result = new ArrayList<>();
+    for (String id : courseIds) {
+        for (Course course : allCourses) {
+            if (course.getCourseId().equals(id)) {
+                result.add(course);
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+
+    public static ArrayList<Student> getStudentsByIdList(ArrayList<String> studentIds) {
+    JsonDatabase db = new JsonDatabase();
+    List<User> allUsers = db.loadUsers();
+    ArrayList<Student> result = new ArrayList<>();
+    for (String id : studentIds) {
+        for (User user : allUsers) {
+            if (user.getUserId().equals(id)) {
+                result.add((Student)user);
+                break;
+            }
+        }
+    }
+        return result;
+    
+}
+
+
 }

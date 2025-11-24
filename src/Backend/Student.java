@@ -14,8 +14,10 @@ public class Student extends User{
 
     public Student(  String username, String email, String passwordHash,ArrayList <CourseProgress> enrolledCourses) {
         super(username,email,passwordHash,"student");
-        this.role="student";
-        this.enrolledCourses=enrolledCourses;
+        this.role="Student";
+       if(enrolledCourses==null)
+        {this.enrolledCourses=new ArrayList<>();}
+        else {this.enrolledCourses=enrolledCourses;}
         
     }
 
@@ -27,10 +29,10 @@ public class Student extends User{
     public void setEnrolledCourses(ArrayList<CourseProgress> enrolledCourses) {
         this.enrolledCourses = enrolledCourses;
     }
-    public void addCourse(Course course) {
-        CourseProgress enrolledCourse= new CourseProgress(course);
+    public void addCourse(String courseid) {
+        CourseProgress enrolledCourse= new CourseProgress(courseid);
         this.enrolledCourses.add(enrolledCourse);
         
     }
-    
+
 }

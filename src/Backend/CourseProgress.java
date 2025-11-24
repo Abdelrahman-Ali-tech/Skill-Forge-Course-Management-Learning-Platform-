@@ -7,38 +7,37 @@ package Backend;
 import java.util.ArrayList;
 
 public class CourseProgress {
-    private Course course;
-    private int progress;
+
+    private String courseiD;
+    private ArrayList<String> progress;
     private ArrayList<QuizAttempt> attempts;
-    
-    public CourseProgress(Course course) {
-        this.course = course;
-        this.progress = 0;
+    public CourseProgress(String courseiD) {
+        this. courseiD =  courseiD;
+        this.progress = new ArrayList<>();
+
     }
 
-    public Course getCourse() {
-        return course;
+    public String getCourse() {
+        return  courseiD;
     }
 
-    public int getProgress() {
-        return this.progress;
+    public float getProgress() {
+        JsonDatabase database=new JsonDatabase();
+       Course course= InstructorManagement.findCoursebyId((ArrayList<Course>) database.loadCourses(), this.courseiD);
+       float progress=this.progress.size()/course.getLessons().size();
+       return progress;
     }
+        public ArrayList<String> getlessonsProgress() {
 
-    public void setProgress(int progress) {
-        this.progress = progress;
+       return progress;
     }
+     
+
     
 
     public void updateProgress(Lesson lesson,Course course) {
-        lesson.setStatue(true);
-        int numOfCompleteLessons=0;
-        int numOfLessons=0;
-        for(Lesson l :course.getLessons())
-        {numOfLessons+=1;
-        if(l.isStatue())
-            numOfCompleteLessons+=1;
-        }
-        this.setProgress(numOfCompleteLessons/numOfLessons);
+      int index = course.getLessons().indexOf(lesson);
+      this.progress.add(String.valueOf(index));
     }
 
     public ArrayList<QuizAttempt> getAttempts() {
