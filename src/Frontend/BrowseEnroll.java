@@ -69,7 +69,6 @@ public class BrowseEnroll extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -100,13 +99,6 @@ public class BrowseEnroll extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Access and mark");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jButton3.setText("return");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,9 +118,7 @@ public class BrowseEnroll extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(jButton1)
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
+                        .addGap(164, 164, 164)
                         .addComponent(jButton3)))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
@@ -140,7 +130,6 @@ public class BrowseEnroll extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -161,10 +150,6 @@ public class BrowseEnroll extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
          JFrame frame = (JFrame) this.getTopLevelAncestor();
         frame.getContentPane().removeAll();
@@ -176,7 +161,6 @@ public class BrowseEnroll extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
