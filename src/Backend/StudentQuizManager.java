@@ -32,7 +32,7 @@ public class StudentQuizManager {
         QuizAttempt attempt = new QuizAttempt(lesson.getLessonId(), score, quiz.getQuestions().size());
 
         for (CourseProgress cp : student.getEnrolledCourses()) {
-            if (cp.getCourse().getCourseId().equals(course.getCourseId())) {
+            if ((InstructorManagement.findCoursebyId((ArrayList<Course>) database.loadCourses(),cp.getCourse())).getCourseId().equals(course.getCourseId())) {
 
                 cp.addAttempt(attempt);
                 
