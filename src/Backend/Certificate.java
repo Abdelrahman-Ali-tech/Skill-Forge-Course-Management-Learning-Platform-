@@ -8,6 +8,6 @@ package Backend;
  *
  * @author ahmedessam
  */
-public class CertificateManager {
+public class Certificate {
     
 }
