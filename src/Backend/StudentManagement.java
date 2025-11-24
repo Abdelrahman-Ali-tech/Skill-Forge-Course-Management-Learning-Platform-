@@ -18,18 +18,28 @@ public class StudentManagement {
         this.courses =(ArrayList<Course>) database.loadCourses() ;
     }
     public ArrayList<Course> browsingCourses ()
-    {
-    ArrayList<Course> availableCourses=(ArrayList<Course>) courses.clone();
+    {database= new JsonDatabase();
+     this.courses =(ArrayList<Course>) database.loadCourses() ;
+    ArrayList<Course> availableCourses=new ArrayList<Course>() ;
+   for(Course course : courses)
+    {   
+     int test=1;
     for(CourseProgress courseProgress : this.student.getEnrolledCourses())
-    {
-
-        availableCourses.remove(courseProgress.getCourse());
+    {   
+      if(course.getCourseId().equals(courseProgress.getCourse()))
+      {test=0;}
+     
+    }
+    if(test==1)
+        availableCourses.add(course);
+    
     }
     return availableCourses;
     
     }
         public ArrayList<Course> enrolledCourses ()
-    {
+    {database= new JsonDatabase();
+     this.courses =(ArrayList<Course>) database.loadCourses() ;
     ArrayList<Course> enrolledCourses=new ArrayList<>();
     for(CourseProgress courseProgress : this.student.getEnrolledCourses())
     {
@@ -46,29 +56,47 @@ public class StudentManagement {
     }
     
     public void  enroll(String id)
-    {  
+    {  database= new JsonDatabase();
+        this.courses =(ArrayList<Course>) database.loadCourses() ;
       
-     /*Course course=findCoursebyId(courses, id);
-      student.addCourse(id);
+     Course course=findCoursebyId(courses, id);
       course.addStudent(student);
       database.saveCourses(courses);
-      
-      
+     
         ArrayList<User> users=(ArrayList<User>) database.loadUsers();
         int index =users.indexOf((User)student);
         users.remove(index);
-        student.removeCourse(course.getCourseId());
+        student.addCourse(course.getCourseId());
         users.add(student);
-        database.saveUsers(users);*/
+        database.saveUsers(users);
     }
     public Course findCoursebyId(ArrayList<Course> courses,String courseID)
     {
     for (Course c :courses)
     {
-    if(c.getCourseId()==courseID)
+    if(c.getCourseId().equals(courseID))
         return c;
     }
     return null;
+    }
+    public void MarkAsComplete(Lesson lesson, Student student, Course course)
+    {
+       ArrayList<User> users=(ArrayList<User>) database.loadUsers();
+        int index =users.indexOf((User)student);
+        users.remove(index);
+        CourseProgress cp=null;
+        for(CourseProgress c :student.getEnrolledCourses())
+        {
+        if(c.getCourse().equals(course.getCourseId()))
+            cp=c;
+        
+        }
+        cp.updateProgress(lesson, course);
+        
+    users.add(student);
+    database.saveUsers(users);
+    
+    
     }
     
     

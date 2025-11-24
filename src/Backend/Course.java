@@ -92,5 +92,17 @@ public class Course {
     public void addStudent(Student student) {
         this.students.add(student);
     }
-    
+    @Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    Course course = (Course) obj;
+    return courseId.equals(course.courseId);
+}
+
+@Override
+public int hashCode() {
+    return courseId.hashCode();
+}
+
 }

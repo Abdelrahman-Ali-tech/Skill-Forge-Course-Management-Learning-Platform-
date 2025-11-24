@@ -25,7 +25,11 @@ public class CourseProgress {
        float progress=this.progress.size()/course.getLessons().size();
        return progress;
     }
+        public ArrayList<String> getlessonsProgress() {
 
+       return progress;
+    }
+     
 
     
 

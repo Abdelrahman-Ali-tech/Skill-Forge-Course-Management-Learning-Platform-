@@ -6,6 +6,7 @@ package Frontend;
 import Backend.Course;
 import Backend.JsonDatabase;
 import Backend.Student;
+import Backend.StudentManagement;
 import Backend.User;
 import Frontend.StudentDashBoard;
 
@@ -24,9 +25,11 @@ public class BrowseEnroll extends javax.swing.JPanel {
     private DefaultTableModel model;
     private List<Course> courseList = new ArrayList<>();
     private Student currentStudent;
+    private StudentManagement studentManagement ;
 
     public BrowseEnroll(Student currentStudent) {
         this.currentStudent = currentStudent;
+        this.studentManagement=new StudentManagement(currentStudent);
         initComponents();
         model = (DefaultTableModel) jTable1.getModel();
         loadCoursesIntoTable();
@@ -34,9 +37,7 @@ public class BrowseEnroll extends javax.swing.JPanel {
 
     private void loadCoursesIntoTable() {
         model.setRowCount(0); 
-        JsonDatabase db = new JsonDatabase();
-        courseList = db.loadCourses();
-
+        courseList = studentManagement.browsingCourses();
         for (Course c : courseList) {
             String enrollStatus = c.getStudents().contains(currentStudent) ? "Enrolled" : "Available";
             model.addRow(new Object[]{
@@ -73,17 +74,17 @@ public class BrowseEnroll extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Course ID", "Title", "Description", "Enroll"
+                "Course ID", "Title", "Description"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, true, true
+                true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -153,23 +154,9 @@ public class BrowseEnroll extends javax.swing.JPanel {
         }
 
         Course selectedCourse = courseList.get(selectedRow);
-        if (selectedCourse.getStudents().contains(currentStudent)) {
-            JOptionPane.showMessageDialog(this, "You are already enrolled in this course!");
-            return;
-        }
-
-        selectedCourse.addStudent(currentStudent);
-        currentStudent.addCourse(selectedCourse);
-
-
-        model.setValueAt("Enrolled", selectedRow, 3);
-
-        JsonDatabase db = new JsonDatabase();
-        db.saveCourses(courseList);
-        List<User> allStudents = db.loadUsers();
-        db.saveUsers(allStudents);
-
+        studentManagement.enroll(selectedCourse.getCourseId());
         JOptionPane.showMessageDialog(this, "Enrolled successfully!");
+        loadCoursesIntoTable();
     
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -181,7 +168,7 @@ public class BrowseEnroll extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
          JFrame frame = (JFrame) this.getTopLevelAncestor();
         frame.getContentPane().removeAll();
-        frame.setContentPane(new StudentDashBoard());
+        frame.setContentPane(new StudentDashBoard(currentStudent));
         frame.revalidate();
         frame.repaint();
     }//GEN-LAST:event_jButton3ActionPerformed
