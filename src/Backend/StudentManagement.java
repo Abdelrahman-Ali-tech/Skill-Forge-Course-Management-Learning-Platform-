@@ -79,7 +79,7 @@ public class StudentManagement {
     }
     return null;
     }
-    public void MarkAsComplete(Lesson lesson, Student student, Course course)
+    public void MarkAsComplete(Lesson lesson, Student student, Course course,QuizAttempt quizAttempt)
     {
        ArrayList<User> users=(ArrayList<User>) database.loadUsers();
         int index =users.indexOf((User)student);
@@ -91,7 +91,7 @@ public class StudentManagement {
             cp=c;
         
         }
-        cp.updateProgress(lesson, course);
+        cp.updateProgress(lesson, course,quizAttempt);
         
     users.add(student);
     database.saveUsers(users);

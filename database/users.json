@@ -85,5 +85,44 @@
     "username": "a",
     "email": "a@gmail.com",
     "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+  },
+  {
+    "createdcCourses": [
+      "578861",
+      "966437",
+      "965305",
+      "501275"
+    ],
+    "userId": "606326",
+    "role": "Instructor",
+    "username": "0",
+    "email": "0@gmail.com",
+    "passwordHash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+  },
+  {
+    "enrolledCourses": [
+      {
+        "courseiD": "965305",
+        "progress": []
+      },
+      {
+        "courseiD": "501275",
+        "progress": [
+          "0"
+        ],
+        "attempts": [
+          {
+            "LesssonId": "191094",
+            "score": 5,
+            "total": 5
+          }
+        ]
+      }
+    ],
+    "userId": "287707",
+    "role": "Student",
+    "username": "9",
+    "email": "9@gmail.com",
+    "passwordHash": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7"
   }
 ]

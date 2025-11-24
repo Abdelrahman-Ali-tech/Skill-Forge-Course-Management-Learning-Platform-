@@ -79,7 +79,7 @@ private boolean finished ;
 
         jButton1.setBackground(new java.awt.Color(0, 204, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add Lesson");
+        jButton1.setText("Make Quiz");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -173,8 +173,7 @@ private boolean finished ;
     {JOptionPane.showMessageDialog(this, "please fill empty fields");
     return;}
        
-       this.course.addLesson(title, content, optionalResources);
-       JOptionPane.showMessageDialog(this, "Successfully Added");
+
         this.finished=true;
         dispose();
        

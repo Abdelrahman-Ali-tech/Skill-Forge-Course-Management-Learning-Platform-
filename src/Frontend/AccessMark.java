@@ -6,8 +6,11 @@ package Frontend;
 
 import Backend.Course;
 import Backend.Lesson;
+import Backend.Quiz;
+import Backend.QuizAttempt;
 import Backend.Student;
 import Backend.StudentManagement;
+import Backend.StudentQuizManager;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -104,13 +107,23 @@ private StudentManagement studentManagement;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       studentManagement.MarkAsComplete(lesson, student, course);
-        JOptionPane.showMessageDialog(this, "Completed");
+TakeQuiz Dialog =new TakeQuiz((JFrame) this.getTopLevelAncestor(), true, this.lesson.getQuiz());
+    Dialog.setVisible(true);
+
+    if(Dialog.isFinished())
+    {  StudentQuizManager studentQuizManager=new StudentQuizManager(student);
+        QuizAttempt quizAttempt=studentQuizManager.submitQuiz(lesson,Dialog.getAnswers(),course);
+        if(quizAttempt.getPrecentage()>=60){
+       studentManagement.MarkAsComplete(lesson, student, course,quizAttempt);
+        JOptionPane.showMessageDialog(this, "passed With Precentage "+quizAttempt.getPrecentage()+" %");}
+        else {JOptionPane.showMessageDialog(this, "Failed With Precentage "+quizAttempt.getPrecentage()+" % Try again");
+        }
         JFrame frame = (JFrame) this.getTopLevelAncestor();
         frame.getContentPane().removeAll();
         frame.setContentPane(new ViewLessons(course, student));
         frame.revalidate();
         frame.repaint();
+} 
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
