@@ -80,8 +80,17 @@ public class Course {
     public void addLesson(Lesson lesson) {
         this.lessons.add(lesson);
     }
-        public void addLesson(String title, String content, String optionalResources) {
+        public void addLesson(String title, String content, String optionalResources,Quiz quiz) {
         Lesson lesson =new Lesson(title, content, optionalResources);
+        lesson.setQuiz(quiz);
+System.out.println("Questions: " + quiz.getQuestions());
+System.out.println("Options: " + quiz.getOptions());
+System.out.println("Correct: " + quiz.getCorrectIndex());
+System.out.println("Questions: " + lesson.getQuiz().getQuestions());
+System.out.println("Options: " + lesson.getQuiz().getOptions());
+System.out.println("Correct: " + lesson.getQuiz().getCorrectIndex());
+
+
         this.lessons.add(lesson);
     }
 

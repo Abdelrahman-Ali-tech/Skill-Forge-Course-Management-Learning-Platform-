@@ -19,7 +19,7 @@ public class StudentQuizManager {
         this.database = new JsonDatabase();
     }
     
-    public QuizAttempt submitQuiz(Lesson lesson, ArrayList<Integer> studentAnswers, Course course) {
+    public QuizAttempt submitQuizalter(Lesson lesson, ArrayList<Integer> studentAnswers, Course course) {
 
         Quiz quiz = lesson.getQuiz();
         int score = 0;
@@ -47,6 +47,19 @@ public class StudentQuizManager {
         all.add(student);
         database.saveUsers(all);
 
+        return attempt;
+    }
+      public QuizAttempt submitQuiz(Lesson lesson, ArrayList<Integer> studentAnswers, Course course) {
+
+        Quiz quiz = lesson.getQuiz();
+        int score = 0;
+
+        for (int i = 0; i < quiz.getQuestions().size(); i++) {
+            if (quiz.getCorrectIndex().get(i) == studentAnswers.get(i))
+                score++;
+        }
+
+        QuizAttempt attempt = new QuizAttempt(lesson.getLessonId(), score, quiz.getQuestions().size());
         return attempt;
     }
     
