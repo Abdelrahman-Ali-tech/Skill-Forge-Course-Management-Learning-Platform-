@@ -7,12 +7,14 @@ package Backend;
 import java.util.ArrayList;
 
 public class CourseProgress {
+
     private String courseiD;
     private ArrayList<String> progress;
-
+    private ArrayList<QuizAttempt> attempts;
     public CourseProgress(String courseiD) {
         this. courseiD =  courseiD;
         this.progress = new ArrayList<>();
+
     }
 
     public String getCourse() {
@@ -37,7 +39,20 @@ public class CourseProgress {
       int index = course.getLessons().indexOf(lesson);
       this.progress.add(String.valueOf(index));
     }
+
+    public ArrayList<QuizAttempt> getAttempts() {
+        return attempts;
+    }
     
     
+    public void addAttempt(QuizAttempt attempt){
+        attempts.add(attempt);
+    }
     
+    public QuizAttempt getAttemptForLesson(String lessonId){
+        for(QuizAttempt a:attempts){
+            if(a.getLesssonId().equals(lessonId)) return a;
+        }
+        return null;
+    }
 }
