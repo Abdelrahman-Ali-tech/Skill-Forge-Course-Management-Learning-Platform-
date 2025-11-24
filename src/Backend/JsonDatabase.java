@@ -81,7 +81,7 @@ public class JsonDatabase {
     }
 
     }
-}
+
 
     public void saveUsers(List users) {
         try (FileWriter writer = new FileWriter(USER_FILE)) {
@@ -133,6 +133,7 @@ public List<Course> loadCourses() {
     } catch (Exception e) {
         return new ArrayList<>();
     }
+}
 
     public void saveCourses(List courses) {
          try (FileWriter writer = new FileWriter(COURSE_FILE))  {
