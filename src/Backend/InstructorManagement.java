@@ -16,6 +16,8 @@ public class InstructorManagement {
    private JsonDatabase database;
     private Instructor instructor;
 
+    
+    
     public InstructorManagement( Instructor instructor) {
         this.createdcCourses = instructor.getCreatedcCourses();
         this.database=new JsonDatabase();
