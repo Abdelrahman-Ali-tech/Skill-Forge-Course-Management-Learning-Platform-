@@ -59,8 +59,10 @@ public class JsonDatabase {
     }
 
     //user
-   public List<User> loadUsers() {
-    try {
+
+    public List<User> loadUsers() {
+        try {
+
         String json = new String(Files.readAllBytes(Paths.get(USER_FILE)));
 
         JsonArray array = JsonParser.parseString(json).getAsJsonArray();
@@ -75,6 +77,9 @@ public class JsonDatabase {
 
     } catch (Exception e) {
         return new ArrayList<>();
+
+    }
+
     }
 }
 
@@ -128,9 +133,6 @@ public List<Course> loadCourses() {
     } catch (Exception e) {
         return new ArrayList<>();
     }
-}
-
-
 
     public void saveCourses(List courses) {
          try (FileWriter writer = new FileWriter(COURSE_FILE))  {
