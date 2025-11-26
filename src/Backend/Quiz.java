@@ -16,9 +16,9 @@ public class Quiz {
     private ArrayList<Integer> correctIndex;
 
     public Quiz(ArrayList<String> questions, ArrayList<ArrayList<String>> options, ArrayList<Integer> correctIndex) {
-        this.questions = new ArrayList<>();
-        this.options = new ArrayList<>();
-        this.correctIndex = new ArrayList<>();
+        this.questions = questions;
+        this.options = options;
+        this.correctIndex = correctIndex;
     }
     
     public void addQuestions(String question,ArrayList<String> options,int correctIndex){

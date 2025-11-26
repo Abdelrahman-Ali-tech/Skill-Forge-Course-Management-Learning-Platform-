@@ -1,462 +1,254 @@
 [
   {
-    "courseId": "395959",
-    "title": "dsd",
-    "description": "dasd",
-    "instructorId": "573196",
+    "courseId": "189412",
+    "title": "py",
+    "description": "pyhon",
+    "instructorId": "352902",
     "lessons": [
       {
-        "lessonId": "571179",
-        "title": "jTextField1adad",
-        "content": "dacssad",
-        "optionalResources": "adadcd",
-        "statue": false
+        "lessonId": "259135",
+        "title": "jTextField1",
+        "content": "ass",
+        "optionalResources": "adDdds",
+        "statue": false,
+        "quiz": {
+          "questions": [
+            "b",
+            "a",
+            "c",
+            "d",
+            "f"
+          ],
+          "options": [
+            [
+              "aacsacscsa",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "acsac",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "aac",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "dsad",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "cdasad",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ]
+          ],
+          "correctIndex": [
+            0,
+            3,
+            3,
+            3,
+            3
+          ]
+        }
+      },
+      {
+        "lessonId": "797679",
+        "title": "rsnnosds",
+        "content": "ewoosefin",
+        "optionalResources": "wripr[orr",
+        "statue": false,
+        "quiz": {
+          "questions": [
+            "jrfdnrdfxlj",
+            "Enter The Question",
+            "Enter The Question",
+            "Enter The Question",
+            "Enter The Question"
+          ],
+          "options": [
+            [
+              "msdksd",
+              "sindklsld",
+              "rglsdl",
+              "Enter The Answer"
+            ],
+            [
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "errww",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ]
+          ],
+          "correctIndex": [
+            0,
+            3,
+            3,
+            2,
+            1
+          ]
+        }
       }
     ],
     "students": [
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "926766",
-            "progress": []
-          },
-          {
-            "courseiD": "811205",
-            "progress": []
-          },
-          {
-            "courseiD": "811205",
-            "progress": []
-          },
-          {
-            "courseiD": "261294",
-            "progress": []
-          },
-          {
-            "courseiD": "926766",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      },
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "926766",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      }
-    ]
-  },
-  {
-    "courseId": "395959",
-    "title": "dsd",
-    "description": "dasd",
-    "instructorId": "573196",
-    "lessons": [],
-    "students": []
-  },
-  {
-    "courseId": "477119",
-    "title": "dwqada",
-    "description": "wdcsa",
-    "instructorId": "573196",
-    "lessons": [
-      {
-        "lessonId": "684347",
-        "title": "jTextField1aA",
-        "content": "SAASSA",
-        "optionalResources": "ADCACSSCA",
-        "statue": false
-      },
-      {
-        "lessonId": "562919",
-        "title": "jTextField1AE",
-        "content": "RSDR",
-        "optionalResources": "GDTTDT",
-        "statue": false
-      },
-      {
-        "lessonId": "668691",
-        "title": "jTextField1 W4",
-        "content": " AE",
-        "optionalResources": "E5S",
-        "statue": false
-      }
-    ],
-    "students": [
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      },
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      },
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "926766",
-            "progress": []
-          },
-          {
-            "courseiD": "395959",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      }
-    ]
-  },
-  {
-    "courseId": "620747",
-    "title": "WEDEW",
-    "description": "EDAAWD",
-    "instructorId": "573196",
-    "lessons": [],
-    "students": [
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      },
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      },
       {
         "enrolledCourses": [],
-        "userId": "958070",
+        "Certificates": [],
+        "CompletedCoursesIds": [],
+        "userId": "940845",
         "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+        "username": "3",
+        "email": "3@gmail.com",
+        "passwordHash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
       }
-    ]
+    ],
+    "statue": "Accepted"
   },
   {
-    "courseId": "926766",
-    "title": "DGGHJGH",
-    "description": "HTJTYC",
-    "instructorId": "573196",
+    "courseId": "110651",
+    "title": "aee",
+    "description": "eadssd",
+    "instructorId": "352902",
     "lessons": [],
-    "students": [
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      },
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "926766",
-            "progress": []
-          },
-          {
-            "courseiD": "811205",
-            "progress": []
-          },
-          {
-            "courseiD": "811205",
-            "progress": []
-          },
-          {
-            "courseiD": "261294",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      },
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "620747",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      }
-    ]
+    "students": [],
+    "statue": "Rejected"
   },
   {
-    "courseId": "811205",
-    "title": "wrfw",
-    "description": "sfrgrge",
-    "instructorId": "573196",
-    "lessons": [],
-    "students": [
+    "courseId": "906890",
+    "title": "owras",
+    "description": "ewaeswewwa",
+    "instructorId": "352902",
+    "lessons": [
       {
-        "enrolledCourses": [
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "926766",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      },
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "926766",
-            "progress": []
-          },
-          {
-            "courseiD": "811205",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
-      },
-      {
-        "enrolledCourses": [
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "926766",
-            "progress": []
-          },
-          {
-            "courseiD": "395959",
-            "progress": [
-              "0"
+        "lessonId": "203404",
+        "title": "jTextField1S",
+        "content": "ASCAWCSA",
+        "optionalResources": "AsVASS",
+        "statue": false,
+        "quiz": {
+          "questions": [
+            "Enter The Question",
+            "Enter The Question",
+            "Enter The Question",
+            "Enter The Question",
+            "Enter The Question"
+          ],
+          "options": [
+            [
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
+            ],
+            [
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer",
+              "Enter The Answer"
             ]
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          }
-        ],
-        "userId": "958070",
-        "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+          ],
+          "correctIndex": [
+            0,
+            3,
+            3,
+            3,
+            3
+          ]
+        }
       }
-    ]
-  },
-  {
-    "courseId": "261294",
-    "title": "wqeqf",
-    "description": "ewffeqw",
-    "instructorId": "573196",
-    "lessons": [],
+    ],
     "students": [
       {
         "enrolledCourses": [
           {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "477119",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "620747",
-            "progress": []
-          },
-          {
-            "courseiD": "926766",
-            "progress": []
-          },
-          {
-            "courseiD": "811205",
-            "progress": []
-          },
-          {
-            "courseiD": "811205",
-            "progress": []
+            "courseiD": "189412",
+            "progress": [
+              "0",
+              "0"
+            ],
+            "attempts": [
+              {
+                "LesssonId": "259135",
+                "score": 5,
+                "total": 5
+              },
+              {
+                "LesssonId": "259135",
+                "score": 5,
+                "total": 5
+              }
+            ]
           }
         ],
-        "userId": "958070",
+        "Certificates": [
+          {
+            "certificateId": "CERT-189412-940845-1764121916925",
+            "userId": "940845",
+            "courseId": "189412",
+            "issueDate": "2025-11-26"
+          }
+        ],
+        "CompletedCoursesIds": [],
+        "userId": "940845",
         "role": "Student",
-        "username": "a",
-        "email": "a@gmail.com",
-        "passwordHash": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+        "username": "3",
+        "email": "3@gmail.com",
+        "passwordHash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
       }
-    ]
+    ],
+    "statue": "Accepted"
+  },
+  {
+    "courseId": "958258",
+    "title": "vs",
+    "description": "sd",
+    "instructorId": "352902",
+    "lessons": [],
+    "students": [],
+    "statue": "Accepted"
   }
 ]

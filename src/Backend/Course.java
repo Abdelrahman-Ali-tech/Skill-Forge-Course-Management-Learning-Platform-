@@ -16,17 +16,19 @@ public class Course {
     private String description;
     private String instructorId;
     private ArrayList<Lesson> lessons;
-    private  ArrayList<Student> students; 
+    private ArrayList<Student> students; 
+    private String statue;
   
     
     
-    public Course( String title, String description, String instructorId,ArrayList<Lesson> lessons,  ArrayList<Student> students) {
+    public Course( String title, String description, String instructorId,ArrayList<Lesson> lessons,  ArrayList<Student> students,String statue) {
         this.courseId =  String.valueOf(100000 + (int) (Math.random() * 900000));
         this.title = title;
         this.description = description;
         this.instructorId = instructorId;
         this.lessons = lessons;
         this.students = students;
+        this.statue=statue;
     }
     public Course( String title, String description, String instructorId) {
         this.courseId =  String.valueOf(100000 + (int) (Math.random() * 900000));
@@ -35,6 +37,7 @@ public class Course {
         this.instructorId = instructorId;
         this.lessons = new ArrayList<Lesson>();
         this.students = new ArrayList<Student>();
+        this.statue="Pending";
     }
 
     public String getCourseId() {
@@ -47,6 +50,14 @@ public class Course {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getStatue() {
+        return statue;
+    }
+
+    public void setStatue(String statue) {
+        this.statue = statue;
     }
 
     public String getInstructorId() {
@@ -80,8 +91,17 @@ public class Course {
     public void addLesson(Lesson lesson) {
         this.lessons.add(lesson);
     }
-        public void addLesson(String title, String content, String optionalResources) {
+        public void addLesson(String title, String content, String optionalResources,Quiz quiz) {
         Lesson lesson =new Lesson(title, content, optionalResources);
+        lesson.setQuiz(quiz);
+System.out.println("Questions: " + quiz.getQuestions());
+System.out.println("Options: " + quiz.getOptions());
+System.out.println("Correct: " + quiz.getCorrectIndex());
+System.out.println("Questions: " + lesson.getQuiz().getQuestions());
+System.out.println("Options: " + lesson.getQuiz().getOptions());
+System.out.println("Correct: " + lesson.getQuiz().getCorrectIndex());
+
+
         this.lessons.add(lesson);
     }
 

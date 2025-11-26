@@ -4,6 +4,7 @@
  */
 package Frontend;
 
+import Backend.Certificate;
 import Backend.Course;
 import Backend.Student;
 import Backend.StudentManagement;
@@ -71,6 +72,7 @@ public class ViewEnrolledCourses extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,6 +101,13 @@ public class ViewEnrolledCourses extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setText("View Certificate");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,7 +115,9 @@ public class ViewEnrolledCourses extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jButton6)
                 .addGap(97, 97, 97))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +132,8 @@ public class ViewEnrolledCourses extends javax.swing.JPanel {
                 .addContainerGap(318, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(37, 37, 37))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -154,6 +166,35 @@ public class ViewEnrolledCourses extends javax.swing.JPanel {
         frame.repaint();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow == -1) {
+    JOptionPane.showMessageDialog(this, "Please select a course first!");
+    return;
+    }
+
+    String selectedCourseId = (String) jTable1.getValueAt(selectedRow, 0);
+
+
+    Certificate cert = null;
+    for (Certificate c : student.getCertificates()) { 
+    if (c.getCourseId().equals(selectedCourseId)) {
+        cert = c;
+        break;
+    }
+        }
+
+    if (cert != null) {
+        JFrame mainContainer = (JFrame) this.getTopLevelAncestor();
+        mainContainer.getContentPane().removeAll();
+        mainContainer.setContentPane(new Certification(student,cert));
+        mainContainer.revalidate();
+        mainContainer.repaint();
+    } else {
+    JOptionPane.showMessageDialog(this, "Certificate not available. Complete the course first.");
+    }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 public void refreshTable() {
     tableModel.setRowCount(0);
     for (Course c : courseList) {
@@ -162,6 +203,7 @@ public void refreshTable() {
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

@@ -14,6 +14,7 @@ public class CourseProgress {
     public CourseProgress(String courseiD) {
         this. courseiD =  courseiD;
         this.progress = new ArrayList<>();
+        this.attempts=new ArrayList<>();
 
     }
 
@@ -35,7 +36,8 @@ public class CourseProgress {
 
     
 
-    public void updateProgress(Lesson lesson,Course course) {
+    public void updateProgress(Lesson lesson,Course course,QuizAttempt quizAttempt) {
+      this.addAttempt(quizAttempt);
       int index = course.getLessons().indexOf(lesson);
       this.progress.add(String.valueOf(index));
     }

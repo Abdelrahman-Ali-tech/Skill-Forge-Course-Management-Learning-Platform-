@@ -27,9 +27,14 @@ public class StudentManagement {
     for(CourseProgress courseProgress : this.student.getEnrolledCourses())
     {   
       if(course.getCourseId().equals(courseProgress.getCourse()))
-      {test=0;}
-     
+      {System.out.println("0");
+          test=0;}
+      
+
     }
+    if(!course.getStatue().equals("Accepted"))
+    {test=0;}
+
     if(test==1)
         availableCourses.add(course);
     
@@ -79,7 +84,7 @@ public class StudentManagement {
     }
     return null;
     }
-    public void MarkAsComplete(Lesson lesson, Student student, Course course)
+    public void MarkAsComplete(Lesson lesson, Student student, Course course,QuizAttempt quizAttempt)
     {
        ArrayList<User> users=(ArrayList<User>) database.loadUsers();
         int index =users.indexOf((User)student);
@@ -91,10 +96,14 @@ public class StudentManagement {
             cp=c;
         
         }
-        cp.updateProgress(lesson, course);
+        cp.updateProgress(lesson, course,quizAttempt);
         
     users.add(student);
+    if(cp.getProgress()==1)
+        
     database.saveUsers(users);
+    CertificateManager certificateManager=new CertificateManager(new JsonDatabase());
+     certificateManager.generateCertificates(cp, student);
     
     
     }

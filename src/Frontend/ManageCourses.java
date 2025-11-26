@@ -40,7 +40,7 @@ public class ManageCourses extends javax.swing.JPanel {
      */
     private void initTable() {
         tableModel = new DefaultTableModel(
-            new String[]{"Course ID", "Title", "Description"}, 0
+            new String[]{"Course ID", "Title", "Description","Statue"}, 0
         );
         jTable1.setModel(tableModel);
     }
@@ -53,7 +53,7 @@ public class ManageCourses extends javax.swing.JPanel {
         tableModel.setRowCount(0);
         for (Course c : courseList) {
             tableModel.addRow(new Object[]{
-                c.getCourseId(), c.getTitle(), c.getDescription()
+                c.getCourseId(), c.getTitle(), c.getDescription(),c.getStatue()
             });
         }
     }
@@ -74,6 +74,7 @@ public class ManageCourses extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -120,23 +121,35 @@ public class ManageCourses extends javax.swing.JPanel {
             }
         });
 
+        jButton7.setText("Logout");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(248, 248, 248)
+                        .addComponent(jButton7)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -150,20 +163,30 @@ public class ManageCourses extends javax.swing.JPanel {
                     .addComponent(jButton1)
                     .addComponent(jButton5)
                     .addComponent(jButton6))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jButton7)
+                .addGap(14, 14, 14))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Course ID", "Title", "Description"
+                "Course ID", "Title", "Description", "Statue"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         jTable1.getAccessibleContext().setAccessibleName("");
 
@@ -301,10 +324,18 @@ loadInstructorCourses();
         frame.revalidate();
         frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        JFrame frame = (JFrame) this.getTopLevelAncestor();
+        frame.getContentPane().removeAll();
+        frame.setContentPane(new Login());
+        frame.revalidate();
+        frame.repaint();
+    }//GEN-LAST:event_jButton7ActionPerformed
 public void refreshTable() {
     tableModel.setRowCount(0);
     for (Course c : courseList) {
-        tableModel.addRow(new Object[]{c.getCourseId(), c.getTitle(), c.getDescription()});
+        tableModel.addRow(new Object[]{c.getCourseId(), c.getTitle(), c.getDescription(),c.getStatue()});
     }
 }
 
@@ -316,6 +347,7 @@ public void refreshTable() {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;

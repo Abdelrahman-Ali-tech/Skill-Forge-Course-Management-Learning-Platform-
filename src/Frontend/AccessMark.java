@@ -4,10 +4,15 @@
  */
 package Frontend;
 
+import Backend.CertificateManager;
 import Backend.Course;
+import Backend.JsonDatabase;
 import Backend.Lesson;
+import Backend.Quiz;
+import Backend.QuizAttempt;
 import Backend.Student;
 import Backend.StudentManagement;
+import Backend.StudentQuizManager;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -29,6 +34,7 @@ private StudentManagement studentManagement;
         this.student = student;
         this.course = course;
         this.studentManagement=new StudentManagement(student);
+        this.jLabel3.setText(lesson.getTitle());
         this.jTextArea1.setText(lesson.getContent());
         this.jTextArea2.setText(lesson.getOptionalResources());
     }
@@ -45,6 +51,7 @@ private StudentManagement studentManagement;
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -58,12 +65,14 @@ private StudentManagement studentManagement;
 
         jLabel2.setText("Optional Resources :");
 
-        jButton2.setText("Mark as done");
+        jButton2.setText("Take Quiz");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("jLabel3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -72,6 +81,8 @@ private StudentManagement studentManagement;
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(jLabel1)
+                .addGap(87, 87, 87)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
@@ -89,10 +100,15 @@ private StudentManagement studentManagement;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
@@ -104,13 +120,24 @@ private StudentManagement studentManagement;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       studentManagement.MarkAsComplete(lesson, student, course);
-        JOptionPane.showMessageDialog(this, "Completed");
+TakeQuiz Dialog =new TakeQuiz((JFrame) this.getTopLevelAncestor(), true, this.lesson.getQuiz());
+    Dialog.setVisible(true);
+
+    if(Dialog.isFinished())
+    {  StudentQuizManager studentQuizManager=new StudentQuizManager(student);
+        QuizAttempt quizAttempt=studentQuizManager.submitQuiz(lesson,Dialog.getAnswers(),course);
+        if(quizAttempt.getPrecentage()>=60){
+       studentManagement.MarkAsComplete(lesson, student, course,quizAttempt);
+        JOptionPane.showMessageDialog(this, "passed With Precentage "+quizAttempt.getPrecentage()+" %");}
+
+        else {JOptionPane.showMessageDialog(this, "Failed With Precentage "+quizAttempt.getPrecentage()+" % Try again");
+        }
         JFrame frame = (JFrame) this.getTopLevelAncestor();
         frame.getContentPane().removeAll();
         frame.setContentPane(new ViewLessons(course, student));
         frame.revalidate();
         frame.repaint();
+} 
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -118,6 +145,7 @@ private StudentManagement studentManagement;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;

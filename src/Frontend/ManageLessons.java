@@ -9,6 +9,7 @@ import Backend.Instructor;
 import Backend.InstructorManagement;
 import Backend.JsonDatabase;
 import Backend.Lesson;
+import java.awt.BorderLayout;
 import java.awt.Frame;
 import java.security.cert.LDAPCertStoreParameters;
 import java.util.ArrayList;
@@ -74,6 +75,7 @@ private Lesson getlessonselected()throws NullPointerException{
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -87,7 +89,6 @@ private Lesson getlessonselected()throws NullPointerException{
                 "Lesson ID", "Title", "Status"
             }
         ));
-        jTable1.setColumnSelectionAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         jScrollPane2.setViewportView(jScrollPane1);
@@ -147,16 +148,30 @@ private Lesson getlessonselected()throws NullPointerException{
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        jButton4.setText("Logout");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(221, 221, 221))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +180,9 @@ private Lesson getlessonselected()throws NullPointerException{
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -215,8 +232,11 @@ private Lesson getlessonselected()throws NullPointerException{
     {title=Dialog.getTitle();
     content=Dialog.getContent();
     optionalResources=Dialog.getOptionalResources();
-    insmg.addLesson(course, title, content, optionalResources);
-    JOptionPane.showMessageDialog(this, "Successfilly Added");
+    MakeQuiz DialogQuiz =new MakeQuiz((JFrame) this.getTopLevelAncestor(), true);
+        DialogQuiz.setVisible(true);
+    if(DialogQuiz.isFinished()){
+    insmg.addLesson(course, title, content, optionalResources,DialogQuiz.getQuiz());
+    JOptionPane.showMessageDialog(this, "Successfilly Added");}
 } 
     loadCoursesLessons();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -229,11 +249,20 @@ private Lesson getlessonselected()throws NullPointerException{
         frame.repaint();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+     JFrame frame = (JFrame) this.getTopLevelAncestor();
+    frame.getContentPane().removeAll();
+    frame.setContentPane(new Login());
+    frame.revalidate();
+    frame.repaint();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

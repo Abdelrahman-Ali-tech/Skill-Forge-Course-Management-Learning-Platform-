@@ -26,7 +26,9 @@ public class GsonConfig {
                 if ("Student".equalsIgnoreCase(role)) {
                     return context.deserialize(json, Student.class);
                 } else if ("Instructor".equalsIgnoreCase(role)) {
-                    return context.deserialize(json, Instructor.class);
+                    return context.deserialize(json, Instructor.class);}
+                  else if ("Admin".equalsIgnoreCase(role)) {
+                    return context.deserialize(json, Admin.class);
                 } else {
                     return context.deserialize(json, User.class);
                 }
