@@ -33,6 +33,19 @@
     "passwordHash": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683"
   },
   {
+    "createdcCourses": [
+      "189412",
+      "110651",
+      "906890",
+      "958258"
+    ],
+    "userId": "352902",
+    "role": "Instructor",
+    "username": "1",
+    "email": "1@gmail.com",
+    "passwordHash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+  },
+  {
     "enrolledCourses": [
       {
         "courseiD": "189412",
@@ -65,6 +78,11 @@
             "total": 5
           }
         ]
+      },
+      {
+        "courseiD": "958258",
+        "progress": [],
+        "attempts": []
       }
     ],
     "Certificates": [
@@ -87,18 +105,5 @@
     "username": "3",
     "email": "3@gmail.com",
     "passwordHash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
-  },
-  {
-    "createdcCourses": [
-      "189412",
-      "110651",
-      "906890",
-      "958258"
-    ],
-    "userId": "352902",
-    "role": "Instructor",
-    "username": "1",
-    "email": "1@gmail.com",
-    "passwordHash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
   }
 ]

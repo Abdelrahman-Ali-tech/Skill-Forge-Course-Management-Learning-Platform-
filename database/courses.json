@@ -248,7 +248,64 @@
     "description": "sd",
     "instructorId": "352902",
     "lessons": [],
-    "students": [],
+    "students": [
+      {
+        "enrolledCourses": [
+          {
+            "courseiD": "189412",
+            "progress": [
+              "0",
+              "0"
+            ],
+            "attempts": [
+              {
+                "LesssonId": "259135",
+                "score": 5,
+                "total": 5
+              },
+              {
+                "LesssonId": "259135",
+                "score": 5,
+                "total": 5
+              }
+            ]
+          },
+          {
+            "courseiD": "906890",
+            "progress": [
+              "0"
+            ],
+            "attempts": [
+              {
+                "LesssonId": "203404",
+                "score": 5,
+                "total": 5
+              }
+            ]
+          }
+        ],
+        "Certificates": [
+          {
+            "certificateId": "CERT-189412-940845-1764121916925",
+            "userId": "940845",
+            "courseId": "189412",
+            "issueDate": "2025-11-26"
+          },
+          {
+            "certificateId": "CERT-906890-940845-1764122942739",
+            "userId": "940845",
+            "courseId": "906890",
+            "issueDate": "2025-11-26"
+          }
+        ],
+        "CompletedCoursesIds": [],
+        "userId": "940845",
+        "role": "Student",
+        "username": "3",
+        "email": "3@gmail.com",
+        "passwordHash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+      }
+    ],
     "statue": "Accepted"
   }
 ]

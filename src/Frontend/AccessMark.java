@@ -126,11 +126,11 @@ TakeQuiz Dialog =new TakeQuiz((JFrame) this.getTopLevelAncestor(), true, this.le
     if(Dialog.isFinished())
     {  StudentQuizManager studentQuizManager=new StudentQuizManager(student);
         QuizAttempt quizAttempt=studentQuizManager.submitQuiz(lesson,Dialog.getAnswers(),course);
-        if(quizAttempt.getPrecentage()>=60){
+        if((quizAttempt.getScore())>=3){
        studentManagement.MarkAsComplete(lesson, student, course,quizAttempt);
-        JOptionPane.showMessageDialog(this, "passed With Precentage "+quizAttempt.getPrecentage()+" %");}
+        JOptionPane.showMessageDialog(this, "passed With Precentage "+quizAttempt.getScore()/5*100+" %");}
 
-        else {JOptionPane.showMessageDialog(this, "Failed With Precentage "+quizAttempt.getPrecentage()+" % Try again");
+        else {JOptionPane.showMessageDialog(this, "Failed With Precentage "+quizAttempt.getScore()/5*100+" % Try again");
         }
         JFrame frame = (JFrame) this.getTopLevelAncestor();
         frame.getContentPane().removeAll();
